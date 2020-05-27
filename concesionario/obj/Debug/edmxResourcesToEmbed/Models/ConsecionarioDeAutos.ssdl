@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ConsecionarioDeAutosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Anio">
+    <Key>
+      <PropertyRef Name="IdAnio" />
+    </Key>
+    <Property Name="IdAnio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Anio" Type="int" />
+  </EntityType>
+  <EntityType Name="AutoExistencia">
+    <Key>
+      <PropertyRef Name="IdAutoExistencia" />
+    </Key>
+    <Property Name="IdAutoExistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="IdAutos" Type="int" />
+    <Property Name="IdModelo" Type="int" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="IdSucursal" Type="int" />
+  </EntityType>
+  <EntityType Name="Autos">
+    <Key>
+      <PropertyRef Name="IdAutos" />
+    </Key>
+    <Property Name="IdAutos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Marca" Type="varchar" MaxLength="25" />
+    <Property Name="IdModelo" Type="int" />
+    <Property Name="IdAnio" Type="int" />
+    <Property Name="Precio" Type="decimal" Precision="14" Scale="4" />
+  </EntityType>
+  <EntityType Name="Aval">
+    <Key>
+      <PropertyRef Name="IdAval" />
+    </Key>
+    <Property Name="IdAval" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="ApP" Type="varchar" MaxLength="30" />
+    <Property Name="ApM" Type="varchar" MaxLength="30" />
+    <Property Name="Telefono" Type="varchar" MaxLength="13" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="ApP" Type="varchar" MaxLength="30" />
+    <Property Name="ApM" Type="varchar" MaxLength="30" />
+    <Property Name="Edad" Type="int" />
+    <Property Name="FechaDeNacimiento" Type="date" />
+    <Property Name="Sexo" Type="varchar" MaxLength="10" />
+    <Property Name="RFC" Type="varchar" MaxLength="13" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="CP" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="13" />
+    <Property Name="TelefonoCasa" Type="varchar" MaxLength="13" />
+    <Property Name="Correo" Type="varchar" MaxLength="50" />
+    <Property Name="IdAval" Type="int" />
+  </EntityType>
+  <EntityType Name="Consecionario">
+    <Key>
+      <PropertyRef Name="IdConsecionario" />
+    </Key>
+    <Property Name="IdConsecionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="ApP" Type="varchar" MaxLength="30" />
+    <Property Name="ApM" Type="varchar" MaxLength="30" />
+    <Property Name="Telefono" Type="varchar" MaxLength="13" />
+    <Property Name="Correo" Type="varchar" MaxLength="50" />
+    <Property Name="RFC" Type="varchar" MaxLength="13" />
+    <Property Name="IdTipoEmpleado" Type="int" />
+  </EntityType>
+  <EntityType Name="EmpleadoSucursal">
+    <Key>
+      <PropertyRef Name="IdEmpleadoSucursal" />
+    </Key>
+    <Property Name="IdEmpleadoSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSucursal" Type="int" Nullable="false" />
+    <Property Name="IdEmpleado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Modelo">
+    <Key>
+      <PropertyRef Name="IdModelo" />
+    </Key>
+    <Property Name="IdModelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Modelo" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Partes">
+    <Key>
+      <PropertyRef Name="IdPartes" />
+    </Key>
+    <Property Name="IdPartes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroDeParte" Type="varchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="PartesInventario">
+    <Key>
+      <PropertyRef Name="IdPartesInventario" />
+    </Key>
+    <Property Name="IdPartesInventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPartes" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="IdSucursal" Type="int" />
+  </EntityType>
+  <EntityType Name="PartesPrecio">
+    <Key>
+      <PropertyRef Name="IdPartesPrecio" />
+    </Key>
+    <Property Name="IdPartesPrecio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Precio" Type="decimal" Precision="15" Scale="4" />
+  </EntityType>
+  <EntityType Name="PartesPrecioBitacora">
+    <Key>
+      <PropertyRef Name="IdPartesPrecioBitacora" />
+    </Key>
+    <Property Name="IdPartesPrecioBitacora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPartes" Type="int" Nullable="false" />
+    <Property Name="IdPartesPrecio" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="Sucursal">
+    <Key>
+      <PropertyRef Name="IdSucursal" />
+    </Key>
+    <Property Name="IdSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="CP" Type="int" />
+    <Property Name="IdConsecionario" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TipoEmpleado">
+    <Key>
+      <PropertyRef Name="IdTipoEmpleado" />
+    </Key>
+    <Property Name="IdTipoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoEmpleado" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="VentaAuto">
+    <Key>
+      <PropertyRef Name="IdVentaAuto" />
+    </Key>
+    <Property Name="IdVentaAuto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEmpleado" Type="int" Nullable="false" />
+    <Property Name="IdAutos" Type="int" Nullable="false" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="IdSucursal" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="VentaParte">
+    <Key>
+      <PropertyRef Name="IdVentaParte" />
+    </Key>
+    <Property Name="IdVentaParte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEmpleado" Type="int" Nullable="false" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="IdSucursal" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <Association Name="FK__AutoExist__IdAut__440B1D61">
+    <End Role="Autos" Type="Self.Autos" Multiplicity="0..1" />
+    <End Role="AutoExistencia" Type="Self.AutoExistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autos">
+        <PropertyRef Name="IdAutos" />
+      </Principal>
+      <Dependent Role="AutoExistencia">
+        <PropertyRef Name="IdAutos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AutoExist__IdMod__44FF419A">
+    <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
+    <End Role="AutoExistencia" Type="Self.AutoExistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelo">
+        <PropertyRef Name="IdModelo" />
+      </Principal>
+      <Dependent Role="AutoExistencia">
+        <PropertyRef Name="IdModelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AutoExist__IdSuc__45F365D3">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+    <End Role="AutoExistencia" Type="Self.AutoExistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="IdSucursal" />
+      </Principal>
+      <Dependent Role="AutoExistencia">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autos__IdAnio__412EB0B6">
+    <End Role="Anio" Type="Self.Anio" Multiplicity="0..1" />
+    <End Role="Autos" Type="Self.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Anio">
+        <PropertyRef Name="IdAnio" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="IdAnio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autos__IdModelo__403A8C7D">
+    <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
+    <End Role="Autos" Type="Self.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelo">
+        <PropertyRef Name="IdModelo" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="IdModelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cliente__IdAval__5629CD9C">
+    <End Role="Aval" Type="Self.Aval" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aval">
+        <PropertyRef Name="IdAval" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdAval" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleado__IdTipo__5AEE82B9">
+    <End Role="TipoEmpleado" Type="Self.TipoEmpleado" Multiplicity="0..1" />
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoEmpleado">
+        <PropertyRef Name="IdTipoEmpleado" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="IdTipoEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EmpleadoS__IdEmp__5EBF139D">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+    <End Role="EmpleadoSucursal" Type="Self.EmpleadoSucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="EmpleadoSucursal">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EmpleadoS__IdSuc__5DCAEF64">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+    <End Role="EmpleadoSucursal" Type="Self.EmpleadoSucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="IdSucursal" />
+      </Principal>
+      <Dependent Role="EmpleadoSucursal">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PartesInv__IdPar__5070F446">
+    <End Role="Partes" Type="Self.Partes" Multiplicity="0..1" />
+    <End Role="PartesInventario" Type="Self.PartesInventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partes">
+        <PropertyRef Name="IdPartes" />
+      </Principal>
+      <Dependent Role="PartesInventario">
+        <PropertyRef Name="IdPartes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PartesInv__IdSuc__5165187F">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+    <End Role="PartesInventario" Type="Self.PartesInventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="IdSucursal" />
+      </Principal>
+      <Dependent Role="PartesInventario">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PartesPre__IdPar__4CA06362">
+    <End Role="Partes" Type="Self.Partes" Multiplicity="1" />
+    <End Role="PartesPrecioBitacora" Type="Self.PartesPrecioBitacora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partes">
+        <PropertyRef Name="IdPartes" />
+      </Principal>
+      <Dependent Role="PartesPrecioBitacora">
+        <PropertyRef Name="IdPartes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PartesPre__IdPar__4D94879B">
+    <End Role="PartesPrecio" Type="Self.PartesPrecio" Multiplicity="1" />
+    <End Role="PartesPrecioBitacora" Type="Self.PartesPrecioBitacora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PartesPrecio">
+        <PropertyRef Name="IdPartesPrecio" />
+      </Principal>
+      <Dependent Role="PartesPrecioBitacora">
+        <PropertyRef Name="IdPartesPrecio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sucursal__IdCons__398D8EEE">
+    <End Role="Consecionario" Type="Self.Consecionario" Multiplicity="0..1" />
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consecionario">
+        <PropertyRef Name="IdConsecionario" />
+      </Principal>
+      <Dependent Role="Sucursal">
+        <PropertyRef Name="IdConsecionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaAuto__IdAut__628FA481">
+    <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
+    <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autos">
+        <PropertyRef Name="IdAutos" />
+      </Principal>
+      <Dependent Role="VentaAuto">
+        <PropertyRef Name="IdAutos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaAuto__IdCli__6383C8BA">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="VentaAuto">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaAuto__IdEmp__619B8048">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+    <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="VentaAuto">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaAuto__IdSuc__6477ECF3">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+    <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="IdSucursal" />
+      </Principal>
+      <Dependent Role="VentaAuto">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaPart__IdCli__68487DD7">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="VentaParte" Type="Self.VentaParte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="VentaParte">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaPart__IdEmp__6754599E">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+    <End Role="VentaParte" Type="Self.VentaParte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="VentaParte">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaPart__IdSuc__693CA210">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+    <End Role="VentaParte" Type="Self.VentaParte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="IdSucursal" />
+      </Principal>
+      <Dependent Role="VentaParte">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ConsecionarioDeAutosModelStoreContainer">
+    <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AutoExistencia" EntityType="Self.AutoExistencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Autos" EntityType="Self.Autos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Aval" EntityType="Self.Aval" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consecionario" EntityType="Self.Consecionario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmpleadoSucursal" EntityType="Self.EmpleadoSucursal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partes" EntityType="Self.Partes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartesInventario" EntityType="Self.PartesInventario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartesPrecio" EntityType="Self.PartesPrecio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartesPrecioBitacora" EntityType="Self.PartesPrecioBitacora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VentaParte" EntityType="Self.VentaParte" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AutoExist__IdAut__440B1D61" Association="Self.FK__AutoExist__IdAut__440B1D61">
+      <End Role="Autos" EntitySet="Autos" />
+      <End Role="AutoExistencia" EntitySet="AutoExistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AutoExist__IdMod__44FF419A" Association="Self.FK__AutoExist__IdMod__44FF419A">
+      <End Role="Modelo" EntitySet="Modelo" />
+      <End Role="AutoExistencia" EntitySet="AutoExistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AutoExist__IdSuc__45F365D3" Association="Self.FK__AutoExist__IdSuc__45F365D3">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="AutoExistencia" EntitySet="AutoExistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autos__IdAnio__412EB0B6" Association="Self.FK__Autos__IdAnio__412EB0B6">
+      <End Role="Anio" EntitySet="Anio" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autos__IdModelo__403A8C7D" Association="Self.FK__Autos__IdModelo__403A8C7D">
+      <End Role="Modelo" EntitySet="Modelo" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cliente__IdAval__5629CD9C" Association="Self.FK__Cliente__IdAval__5629CD9C">
+      <End Role="Aval" EntitySet="Aval" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleado__IdTipo__5AEE82B9" Association="Self.FK__Empleado__IdTipo__5AEE82B9">
+      <End Role="TipoEmpleado" EntitySet="TipoEmpleado" />
+      <End Role="Empleado" EntitySet="Empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EmpleadoS__IdEmp__5EBF139D" Association="Self.FK__EmpleadoS__IdEmp__5EBF139D">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="EmpleadoSucursal" EntitySet="EmpleadoSucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EmpleadoS__IdSuc__5DCAEF64" Association="Self.FK__EmpleadoS__IdSuc__5DCAEF64">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="EmpleadoSucursal" EntitySet="EmpleadoSucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PartesInv__IdPar__5070F446" Association="Self.FK__PartesInv__IdPar__5070F446">
+      <End Role="Partes" EntitySet="Partes" />
+      <End Role="PartesInventario" EntitySet="PartesInventario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PartesInv__IdSuc__5165187F" Association="Self.FK__PartesInv__IdSuc__5165187F">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="PartesInventario" EntitySet="PartesInventario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PartesPre__IdPar__4CA06362" Association="Self.FK__PartesPre__IdPar__4CA06362">
+      <End Role="Partes" EntitySet="Partes" />
+      <End Role="PartesPrecioBitacora" EntitySet="PartesPrecioBitacora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PartesPre__IdPar__4D94879B" Association="Self.FK__PartesPre__IdPar__4D94879B">
+      <End Role="PartesPrecio" EntitySet="PartesPrecio" />
+      <End Role="PartesPrecioBitacora" EntitySet="PartesPrecioBitacora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sucursal__IdCons__398D8EEE" Association="Self.FK__Sucursal__IdCons__398D8EEE">
+      <End Role="Consecionario" EntitySet="Consecionario" />
+      <End Role="Sucursal" EntitySet="Sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaAuto__IdAut__628FA481" Association="Self.FK__VentaAuto__IdAut__628FA481">
+      <End Role="Autos" EntitySet="Autos" />
+      <End Role="VentaAuto" EntitySet="VentaAuto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaAuto__IdCli__6383C8BA" Association="Self.FK__VentaAuto__IdCli__6383C8BA">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="VentaAuto" EntitySet="VentaAuto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaAuto__IdEmp__619B8048" Association="Self.FK__VentaAuto__IdEmp__619B8048">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="VentaAuto" EntitySet="VentaAuto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaAuto__IdSuc__6477ECF3" Association="Self.FK__VentaAuto__IdSuc__6477ECF3">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="VentaAuto" EntitySet="VentaAuto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaPart__IdCli__68487DD7" Association="Self.FK__VentaPart__IdCli__68487DD7">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="VentaParte" EntitySet="VentaParte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaPart__IdEmp__6754599E" Association="Self.FK__VentaPart__IdEmp__6754599E">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="VentaParte" EntitySet="VentaParte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaPart__IdSuc__693CA210" Association="Self.FK__VentaPart__IdSuc__693CA210">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="VentaParte" EntitySet="VentaParte" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
