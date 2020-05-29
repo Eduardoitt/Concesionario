@@ -13,6 +13,12 @@ namespace concesionario.Controllers
         {
             return View();
         }
+        //[HttpGet]
+        //public ActionResult AceptarPagos()
+        //{
+        //    var Resp = 1;
+        //    return Json(new { value = Resp }, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult Model3()
         {
             return View();

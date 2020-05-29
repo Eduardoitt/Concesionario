@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelosController.cs" />
+    <Compile Include="Controllers\OrdenarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +233,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="FotosCarros\cybertruck.jpg" />
     <Content Include="FotosCarros\model3.jpg" />
+    <Content Include="FotosCarros\ModeloS\Gif1.gif" />
+    <Content Include="FotosCarros\ModeloS\gif2.gif" />
+    <Content Include="FotosCarros\ModeloS\models.jpg" />
+    <Content Include="FotosCarros\ModeloS\ModelSC.jpg" />
+    <Content Include="FotosCarros\ModeloS\modelsW.jpg" />
     <Content Include="FotosCarros\models.jpg" />
     <Content Include="FotosCarros\modelx.jpg" />
     <Content Include="FotosCarros\modely.jpg" />
@@ -478,6 +484,7 @@
     <Content Include="Views\Modelos\ModelX.cshtml" />
     <Content Include="Views\Modelos\ModelY.cshtml" />
     <Content Include="Views\Modelos\Cybertruck.cshtml" />
+    <Content Include="Views\Ordenar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
