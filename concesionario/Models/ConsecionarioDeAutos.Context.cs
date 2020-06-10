@@ -72,5 +72,22 @@ namespace concesionario.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AutosAlta", marcaParameter, idColorParameter, idModeloParameter, idAnioParameter, precioParameter);
         }
+    
+        public virtual int Caracteristicas(Nullable<int> idAuto, Nullable<int> idPerformace, Nullable<int> idColor)
+        {
+            var idAutoParameter = idAuto.HasValue ?
+                new ObjectParameter("IdAuto", idAuto) :
+                new ObjectParameter("IdAuto", typeof(int));
+    
+            var idPerformaceParameter = idPerformace.HasValue ?
+                new ObjectParameter("IdPerformace", idPerformace) :
+                new ObjectParameter("IdPerformace", typeof(int));
+    
+            var idColorParameter = idColor.HasValue ?
+                new ObjectParameter("IdColor", idColor) :
+                new ObjectParameter("IdColor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Caracteristicas", idAutoParameter, idPerformaceParameter, idColorParameter);
+        }
     }
 }

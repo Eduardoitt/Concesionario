@@ -685,5 +685,10 @@
       <Parameter Name="IdAnio" Mode="In" Type="Int32" />
       <Parameter Name="Precio" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="Caracteristicas">
+      <Parameter Name="IdAuto" Mode="In" Type="Int32" />
+      <Parameter Name="IdPerformace" Mode="In" Type="Int32" />
+      <Parameter Name="IdColor" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

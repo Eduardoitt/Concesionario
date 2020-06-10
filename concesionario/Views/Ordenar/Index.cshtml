@@ -1,5 +1,4 @@
-﻿
-@{  
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -19,17 +18,132 @@
     </ul>
     <div class="tab-content tab-space">
         <div class="tab-pane active" id="Personalizar">
-           <div class="row">
-               <div class="col-md-8">
-                   <img src="~/FotosCarros/ModeloS/model3p.jpg" />
-               </div>
-               <div class="col-md-4">
-                   <input value="color" type="button" />
-               </div>
-           </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <img src="~/FotosCarros/ModeloS/model3p.jpg" />
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <label>Color</label>
+                                @Html.DropDownList("IdColor", new SelectList(ViewBag.Color, "IdColor", "Color"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Performance</label>
+                                @Html.DropDownList("IdPerformace", new SelectList(ViewBag.Performance, "IdPerformace", "Performace"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
         <div class="tab-pane" id="Pago">
-            Pago
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Nombre</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdNombre" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Apellido Paterno</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdApP" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Apellido Materno</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdApM" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Edad</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdEdad" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Fecha Nacimiento</label>
+                        <span class="material-input">
+                            <input type="date" class="form-control" id="IdFecha" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Sexo</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdSexo" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">RFC</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdRFC" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Direccion</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdDireccion" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">CP</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdCP" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Telefono</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdTelefono" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Telefono Casa</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdTelefonoC" />
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Correo</label>
+                        <span class="material-input">
+                            <input type="text" class="form-control" id="IdCorreo" />
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
