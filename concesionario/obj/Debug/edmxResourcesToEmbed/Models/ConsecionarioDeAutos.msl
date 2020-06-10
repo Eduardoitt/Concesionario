@@ -9,6 +9,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Auto_Adiccionales">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Auto_Adiccionales">
+        <MappingFragment StoreEntitySet="Auto_Adiccionales">
+          <ScalarProperty Name="IdAuto_Adic" ColumnName="IdAuto_Adic" />
+          <ScalarProperty Name="IdAutos" ColumnName="IdAutos" />
+          <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+          <ScalarProperty Name="IdPerformance" ColumnName="IdPerformance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AutoExistencia">
       <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.AutoExistencia">
         <MappingFragment StoreEntitySet="AutoExistencia">
@@ -26,6 +36,7 @@
         <MappingFragment StoreEntitySet="Autos">
           <ScalarProperty Name="IdAutos" ColumnName="IdAutos" />
           <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="IdColor" ColumnName="IdColor" />
           <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
           <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
           <ScalarProperty Name="Precio" ColumnName="Precio" />
@@ -60,6 +71,15 @@
           <ScalarProperty Name="TelefonoCasa" ColumnName="TelefonoCasa" />
           <ScalarProperty Name="Correo" ColumnName="Correo" />
           <ScalarProperty Name="IdAval" ColumnName="IdAval" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Color">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Color">
+        <MappingFragment StoreEntitySet="Color">
+          <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+          <ScalarProperty Name="Color1" ColumnName="Color" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,6 +158,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Performance">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Performance">
+        <MappingFragment StoreEntitySet="Performance">
+          <ScalarProperty Name="IdPerformance" ColumnName="IdPerformance" />
+          <ScalarProperty Name="Performance1" ColumnName="Performance" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Sucursal">
       <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Sucursal">
         <MappingFragment StoreEntitySet="Sucursal">
@@ -146,17 +175,6 @@
           <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="CP" ColumnName="CP" />
           <ScalarProperty Name="IdConsecionario" ColumnName="IdConsecionario" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -174,6 +192,7 @@
           <ScalarProperty Name="IdVentaAuto" ColumnName="IdVentaAuto" />
           <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
           <ScalarProperty Name="IdAutos" ColumnName="IdAutos" />
+          <ScalarProperty Name="IdAuto_Adic" ColumnName="IdAuto_Adic" />
           <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
           <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
@@ -191,5 +210,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AutosAlta" FunctionName="ConsecionarioDeAutosModel.Store.AutosAlta" />
   </EntityContainerMapping>
 </Mapping>

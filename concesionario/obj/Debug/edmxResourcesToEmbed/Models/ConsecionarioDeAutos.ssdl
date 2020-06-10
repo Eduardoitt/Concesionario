@@ -7,6 +7,15 @@
     <Property Name="IdAnio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Anio" Type="int" />
   </EntityType>
+  <EntityType Name="Auto_Adiccionales">
+    <Key>
+      <PropertyRef Name="IdAuto_Adic" />
+    </Key>
+    <Property Name="IdAuto_Adic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAutos" Type="int" Nullable="false" />
+    <Property Name="IdColor" Type="int" Nullable="false" />
+    <Property Name="IdPerformance" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="AutoExistencia">
     <Key>
       <PropertyRef Name="IdAutoExistencia" />
@@ -24,6 +33,7 @@
     </Key>
     <Property Name="IdAutos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Marca" Type="varchar" MaxLength="25" />
+    <Property Name="IdColor" Type="int" />
     <Property Name="IdModelo" Type="int" />
     <Property Name="IdAnio" Type="int" />
     <Property Name="Precio" Type="decimal" Precision="14" Scale="4" />
@@ -57,12 +67,20 @@
     <Property Name="Correo" Type="varchar" MaxLength="50" />
     <Property Name="IdAval" Type="int" />
   </EntityType>
+  <EntityType Name="Color">
+    <Key>
+      <PropertyRef Name="IdColor" />
+    </Key>
+    <Property Name="IdColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="20" />
+    <Property Name="Precio" Type="decimal" Precision="14" Scale="4" />
+  </EntityType>
   <EntityType Name="Consecionario">
     <Key>
       <PropertyRef Name="IdConsecionario" />
     </Key>
     <Property Name="IdConsecionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Empleado">
     <Key>
@@ -124,25 +142,23 @@
     <Property Name="IdPartesPrecio" Type="int" Nullable="false" />
     <Property Name="Fecha" Type="date" />
   </EntityType>
+  <EntityType Name="Performance">
+    <Key>
+      <PropertyRef Name="IdPerformance" />
+    </Key>
+    <Property Name="IdPerformance" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Performance" Type="varchar" MaxLength="60" />
+    <Property Name="Precio" Type="decimal" Precision="14" Scale="4" />
+  </EntityType>
   <EntityType Name="Sucursal">
     <Key>
       <PropertyRef Name="IdSucursal" />
     </Key>
     <Property Name="IdSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" />
     <Property Name="CP" Type="int" />
     <Property Name="IdConsecionario" Type="int" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TipoEmpleado">
     <Key>
@@ -158,6 +174,7 @@
     <Property Name="IdVentaAuto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdEmpleado" Type="int" Nullable="false" />
     <Property Name="IdAutos" Type="int" Nullable="false" />
+    <Property Name="IdAuto_Adic" Type="int" Nullable="false" />
     <Property Name="IdCliente" Type="int" Nullable="false" />
     <Property Name="IdSucursal" Type="int" Nullable="false" />
     <Property Name="Fecha" Type="date" />
@@ -172,7 +189,43 @@
     <Property Name="IdSucursal" Type="int" Nullable="false" />
     <Property Name="Fecha" Type="date" />
   </EntityType>
-  <Association Name="FK__AutoExist__IdAut__440B1D61">
+  <Association Name="FK__Auto_Adic__IdAut__1332DBDC">
+    <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
+    <End Role="Auto_Adiccionales" Type="Self.Auto_Adiccionales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autos">
+        <PropertyRef Name="IdAutos" />
+      </Principal>
+      <Dependent Role="Auto_Adiccionales">
+        <PropertyRef Name="IdAutos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Auto_Adic__IdCol__14270015">
+    <End Role="Color" Type="Self.Color" Multiplicity="1" />
+    <End Role="Auto_Adiccionales" Type="Self.Auto_Adiccionales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="IdColor" />
+      </Principal>
+      <Dependent Role="Auto_Adiccionales">
+        <PropertyRef Name="IdColor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Auto_Adic__IdPer__151B244E">
+    <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+    <End Role="Auto_Adiccionales" Type="Self.Auto_Adiccionales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Performance">
+        <PropertyRef Name="IdPerformance" />
+      </Principal>
+      <Dependent Role="Auto_Adiccionales">
+        <PropertyRef Name="IdPerformance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AutoExist__IdAut__1F98B2C1">
     <End Role="Autos" Type="Self.Autos" Multiplicity="0..1" />
     <End Role="AutoExistencia" Type="Self.AutoExistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -184,7 +237,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AutoExist__IdMod__44FF419A">
+  <Association Name="FK__AutoExist__IdMod__208CD6FA">
     <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
     <End Role="AutoExistencia" Type="Self.AutoExistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -196,7 +249,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AutoExist__IdSuc__45F365D3">
+  <Association Name="FK__AutoExist__IdSuc__2180FB33">
     <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
     <End Role="AutoExistencia" Type="Self.AutoExistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -208,7 +261,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Autos__IdAnio__412EB0B6">
+  <Association Name="FK__Autos__IdAnio__10566F31">
     <End Role="Anio" Type="Self.Anio" Multiplicity="0..1" />
     <End Role="Autos" Type="Self.Autos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -220,7 +273,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Autos__IdModelo__403A8C7D">
+  <Association Name="FK__Autos__IdColor__0E6E26BF">
+    <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+    <End Role="Autos" Type="Self.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="IdColor" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="IdColor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autos__IdModelo__0F624AF8">
     <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
     <End Role="Autos" Type="Self.Autos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -232,7 +297,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cliente__IdAval__5629CD9C">
+  <Association Name="FK__Cliente__IdAval__5FB337D6">
     <End Role="Aval" Type="Self.Aval" Multiplicity="0..1" />
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
     <ReferentialConstraint>
@@ -244,7 +309,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Empleado__IdTipo__5AEE82B9">
+  <Association Name="FK__Empleado__IdTipo__6477ECF3">
     <End Role="TipoEmpleado" Type="Self.TipoEmpleado" Multiplicity="0..1" />
     <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
     <ReferentialConstraint>
@@ -256,7 +321,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EmpleadoS__IdEmp__5EBF139D">
+  <Association Name="FK__EmpleadoS__IdEmp__68487DD7">
     <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
     <End Role="EmpleadoSucursal" Type="Self.EmpleadoSucursal" Multiplicity="*" />
     <ReferentialConstraint>
@@ -268,7 +333,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EmpleadoS__IdSuc__5DCAEF64">
+  <Association Name="FK__EmpleadoS__IdSuc__6754599E">
     <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
     <End Role="EmpleadoSucursal" Type="Self.EmpleadoSucursal" Multiplicity="*" />
     <ReferentialConstraint>
@@ -280,7 +345,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PartesInv__IdPar__5070F446">
+  <Association Name="FK__PartesInv__IdPar__59FA5E80">
     <End Role="Partes" Type="Self.Partes" Multiplicity="0..1" />
     <End Role="PartesInventario" Type="Self.PartesInventario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -292,7 +357,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PartesInv__IdSuc__5165187F">
+  <Association Name="FK__PartesInv__IdSuc__5AEE82B9">
     <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
     <End Role="PartesInventario" Type="Self.PartesInventario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -304,7 +369,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PartesPre__IdPar__4CA06362">
+  <Association Name="FK__PartesPre__IdPar__5629CD9C">
     <End Role="Partes" Type="Self.Partes" Multiplicity="1" />
     <End Role="PartesPrecioBitacora" Type="Self.PartesPrecioBitacora" Multiplicity="*" />
     <ReferentialConstraint>
@@ -316,7 +381,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PartesPre__IdPar__4D94879B">
+  <Association Name="FK__PartesPre__IdPar__571DF1D5">
     <End Role="PartesPrecio" Type="Self.PartesPrecio" Multiplicity="1" />
     <End Role="PartesPrecioBitacora" Type="Self.PartesPrecioBitacora" Multiplicity="*" />
     <ReferentialConstraint>
@@ -340,7 +405,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaAuto__IdAut__628FA481">
+  <Association Name="FK__VentaAuto__IdAut__18EBB532">
     <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
     <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -352,7 +417,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaAuto__IdCli__6383C8BA">
+  <Association Name="FK__VentaAuto__IdAut__19DFD96B">
+    <End Role="Auto_Adiccionales" Type="Self.Auto_Adiccionales" Multiplicity="1" />
+    <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auto_Adiccionales">
+        <PropertyRef Name="IdAuto_Adic" />
+      </Principal>
+      <Dependent Role="VentaAuto">
+        <PropertyRef Name="IdAuto_Adic" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaAuto__IdCli__1AD3FDA4">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
     <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -364,7 +441,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaAuto__IdEmp__619B8048">
+  <Association Name="FK__VentaAuto__IdEmp__17F790F9">
     <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
     <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -376,7 +453,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaAuto__IdSuc__6477ECF3">
+  <Association Name="FK__VentaAuto__IdSuc__1BC821DD">
     <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
     <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -388,7 +465,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaPart__IdCli__68487DD7">
+  <Association Name="FK__VentaPart__IdCli__76969D2E">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
     <End Role="VentaParte" Type="Self.VentaParte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -400,7 +477,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaPart__IdEmp__6754599E">
+  <Association Name="FK__VentaPart__IdEmp__75A278F5">
     <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
     <End Role="VentaParte" Type="Self.VentaParte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -412,7 +489,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VentaPart__IdSuc__693CA210">
+  <Association Name="FK__VentaPart__IdSuc__778AC167">
     <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
     <End Role="VentaParte" Type="Self.VentaParte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -424,12 +501,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="AutosAlta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Marca" Type="varchar" Mode="In" />
+    <Parameter Name="IdColor" Type="int" Mode="In" />
+    <Parameter Name="IdModelo" Type="int" Mode="In" />
+    <Parameter Name="IdAnio" Type="int" Mode="In" />
+    <Parameter Name="Precio" Type="decimal" Mode="In" />
+  </Function>
   <EntityContainer Name="ConsecionarioDeAutosModelStoreContainer">
     <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Auto_Adiccionales" EntityType="Self.Auto_Adiccionales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AutoExistencia" EntityType="Self.AutoExistencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Autos" EntityType="Self.Autos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Aval" EntityType="Self.Aval" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Consecionario" EntityType="Self.Consecionario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmpleadoSucursal" EntityType="Self.EmpleadoSucursal" Schema="dbo" store:Type="Tables" />
@@ -438,60 +524,76 @@
     <EntitySet Name="PartesInventario" EntityType="Self.PartesInventario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartesPrecio" EntityType="Self.PartesPrecio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartesPrecioBitacora" EntityType="Self.PartesPrecioBitacora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VentaParte" EntityType="Self.VentaParte" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__AutoExist__IdAut__440B1D61" Association="Self.FK__AutoExist__IdAut__440B1D61">
+    <AssociationSet Name="FK__Auto_Adic__IdAut__1332DBDC" Association="Self.FK__Auto_Adic__IdAut__1332DBDC">
+      <End Role="Autos" EntitySet="Autos" />
+      <End Role="Auto_Adiccionales" EntitySet="Auto_Adiccionales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Auto_Adic__IdCol__14270015" Association="Self.FK__Auto_Adic__IdCol__14270015">
+      <End Role="Color" EntitySet="Color" />
+      <End Role="Auto_Adiccionales" EntitySet="Auto_Adiccionales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Auto_Adic__IdPer__151B244E" Association="Self.FK__Auto_Adic__IdPer__151B244E">
+      <End Role="Performance" EntitySet="Performance" />
+      <End Role="Auto_Adiccionales" EntitySet="Auto_Adiccionales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AutoExist__IdAut__1F98B2C1" Association="Self.FK__AutoExist__IdAut__1F98B2C1">
       <End Role="Autos" EntitySet="Autos" />
       <End Role="AutoExistencia" EntitySet="AutoExistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__AutoExist__IdMod__44FF419A" Association="Self.FK__AutoExist__IdMod__44FF419A">
+    <AssociationSet Name="FK__AutoExist__IdMod__208CD6FA" Association="Self.FK__AutoExist__IdMod__208CD6FA">
       <End Role="Modelo" EntitySet="Modelo" />
       <End Role="AutoExistencia" EntitySet="AutoExistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__AutoExist__IdSuc__45F365D3" Association="Self.FK__AutoExist__IdSuc__45F365D3">
+    <AssociationSet Name="FK__AutoExist__IdSuc__2180FB33" Association="Self.FK__AutoExist__IdSuc__2180FB33">
       <End Role="Sucursal" EntitySet="Sucursal" />
       <End Role="AutoExistencia" EntitySet="AutoExistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Autos__IdAnio__412EB0B6" Association="Self.FK__Autos__IdAnio__412EB0B6">
+    <AssociationSet Name="FK__Autos__IdAnio__10566F31" Association="Self.FK__Autos__IdAnio__10566F31">
       <End Role="Anio" EntitySet="Anio" />
       <End Role="Autos" EntitySet="Autos" />
     </AssociationSet>
-    <AssociationSet Name="FK__Autos__IdModelo__403A8C7D" Association="Self.FK__Autos__IdModelo__403A8C7D">
+    <AssociationSet Name="FK__Autos__IdColor__0E6E26BF" Association="Self.FK__Autos__IdColor__0E6E26BF">
+      <End Role="Color" EntitySet="Color" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autos__IdModelo__0F624AF8" Association="Self.FK__Autos__IdModelo__0F624AF8">
       <End Role="Modelo" EntitySet="Modelo" />
       <End Role="Autos" EntitySet="Autos" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cliente__IdAval__5629CD9C" Association="Self.FK__Cliente__IdAval__5629CD9C">
+    <AssociationSet Name="FK__Cliente__IdAval__5FB337D6" Association="Self.FK__Cliente__IdAval__5FB337D6">
       <End Role="Aval" EntitySet="Aval" />
       <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
-    <AssociationSet Name="FK__Empleado__IdTipo__5AEE82B9" Association="Self.FK__Empleado__IdTipo__5AEE82B9">
+    <AssociationSet Name="FK__Empleado__IdTipo__6477ECF3" Association="Self.FK__Empleado__IdTipo__6477ECF3">
       <End Role="TipoEmpleado" EntitySet="TipoEmpleado" />
       <End Role="Empleado" EntitySet="Empleado" />
     </AssociationSet>
-    <AssociationSet Name="FK__EmpleadoS__IdEmp__5EBF139D" Association="Self.FK__EmpleadoS__IdEmp__5EBF139D">
+    <AssociationSet Name="FK__EmpleadoS__IdEmp__68487DD7" Association="Self.FK__EmpleadoS__IdEmp__68487DD7">
       <End Role="Empleado" EntitySet="Empleado" />
       <End Role="EmpleadoSucursal" EntitySet="EmpleadoSucursal" />
     </AssociationSet>
-    <AssociationSet Name="FK__EmpleadoS__IdSuc__5DCAEF64" Association="Self.FK__EmpleadoS__IdSuc__5DCAEF64">
+    <AssociationSet Name="FK__EmpleadoS__IdSuc__6754599E" Association="Self.FK__EmpleadoS__IdSuc__6754599E">
       <End Role="Sucursal" EntitySet="Sucursal" />
       <End Role="EmpleadoSucursal" EntitySet="EmpleadoSucursal" />
     </AssociationSet>
-    <AssociationSet Name="FK__PartesInv__IdPar__5070F446" Association="Self.FK__PartesInv__IdPar__5070F446">
+    <AssociationSet Name="FK__PartesInv__IdPar__59FA5E80" Association="Self.FK__PartesInv__IdPar__59FA5E80">
       <End Role="Partes" EntitySet="Partes" />
       <End Role="PartesInventario" EntitySet="PartesInventario" />
     </AssociationSet>
-    <AssociationSet Name="FK__PartesInv__IdSuc__5165187F" Association="Self.FK__PartesInv__IdSuc__5165187F">
+    <AssociationSet Name="FK__PartesInv__IdSuc__5AEE82B9" Association="Self.FK__PartesInv__IdSuc__5AEE82B9">
       <End Role="Sucursal" EntitySet="Sucursal" />
       <End Role="PartesInventario" EntitySet="PartesInventario" />
     </AssociationSet>
-    <AssociationSet Name="FK__PartesPre__IdPar__4CA06362" Association="Self.FK__PartesPre__IdPar__4CA06362">
+    <AssociationSet Name="FK__PartesPre__IdPar__5629CD9C" Association="Self.FK__PartesPre__IdPar__5629CD9C">
       <End Role="Partes" EntitySet="Partes" />
       <End Role="PartesPrecioBitacora" EntitySet="PartesPrecioBitacora" />
     </AssociationSet>
-    <AssociationSet Name="FK__PartesPre__IdPar__4D94879B" Association="Self.FK__PartesPre__IdPar__4D94879B">
+    <AssociationSet Name="FK__PartesPre__IdPar__571DF1D5" Association="Self.FK__PartesPre__IdPar__571DF1D5">
       <End Role="PartesPrecio" EntitySet="PartesPrecio" />
       <End Role="PartesPrecioBitacora" EntitySet="PartesPrecioBitacora" />
     </AssociationSet>
@@ -499,31 +601,35 @@
       <End Role="Consecionario" EntitySet="Consecionario" />
       <End Role="Sucursal" EntitySet="Sucursal" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaAuto__IdAut__628FA481" Association="Self.FK__VentaAuto__IdAut__628FA481">
+    <AssociationSet Name="FK__VentaAuto__IdAut__18EBB532" Association="Self.FK__VentaAuto__IdAut__18EBB532">
       <End Role="Autos" EntitySet="Autos" />
       <End Role="VentaAuto" EntitySet="VentaAuto" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaAuto__IdCli__6383C8BA" Association="Self.FK__VentaAuto__IdCli__6383C8BA">
+    <AssociationSet Name="FK__VentaAuto__IdAut__19DFD96B" Association="Self.FK__VentaAuto__IdAut__19DFD96B">
+      <End Role="Auto_Adiccionales" EntitySet="Auto_Adiccionales" />
+      <End Role="VentaAuto" EntitySet="VentaAuto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaAuto__IdCli__1AD3FDA4" Association="Self.FK__VentaAuto__IdCli__1AD3FDA4">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="VentaAuto" EntitySet="VentaAuto" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaAuto__IdEmp__619B8048" Association="Self.FK__VentaAuto__IdEmp__619B8048">
+    <AssociationSet Name="FK__VentaAuto__IdEmp__17F790F9" Association="Self.FK__VentaAuto__IdEmp__17F790F9">
       <End Role="Empleado" EntitySet="Empleado" />
       <End Role="VentaAuto" EntitySet="VentaAuto" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaAuto__IdSuc__6477ECF3" Association="Self.FK__VentaAuto__IdSuc__6477ECF3">
+    <AssociationSet Name="FK__VentaAuto__IdSuc__1BC821DD" Association="Self.FK__VentaAuto__IdSuc__1BC821DD">
       <End Role="Sucursal" EntitySet="Sucursal" />
       <End Role="VentaAuto" EntitySet="VentaAuto" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaPart__IdCli__68487DD7" Association="Self.FK__VentaPart__IdCli__68487DD7">
+    <AssociationSet Name="FK__VentaPart__IdCli__76969D2E" Association="Self.FK__VentaPart__IdCli__76969D2E">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="VentaParte" EntitySet="VentaParte" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaPart__IdEmp__6754599E" Association="Self.FK__VentaPart__IdEmp__6754599E">
+    <AssociationSet Name="FK__VentaPart__IdEmp__75A278F5" Association="Self.FK__VentaPart__IdEmp__75A278F5">
       <End Role="Empleado" EntitySet="Empleado" />
       <End Role="VentaParte" EntitySet="VentaParte" />
     </AssociationSet>
-    <AssociationSet Name="FK__VentaPart__IdSuc__693CA210" Association="Self.FK__VentaPart__IdSuc__693CA210">
+    <AssociationSet Name="FK__VentaPart__IdSuc__778AC167" Association="Self.FK__VentaPart__IdSuc__778AC167">
       <End Role="Sucursal" EntitySet="Sucursal" />
       <End Role="VentaParte" EntitySet="VentaParte" />
     </AssociationSet>

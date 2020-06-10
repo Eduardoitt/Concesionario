@@ -142,6 +142,81 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Anio.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AutoExistencia.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Autos.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Auto_Adiccionales.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Aval.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Color.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Consecionario.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsecionarioDeAutos.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConsecionarioDeAutos.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsecionarioDeAutos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsecionarioDeAutos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConsecionarioDeAutos.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empleado.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpleadoSucursal.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Modelo.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Partes.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartesInventario.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartesPrecio.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartesPrecioBitacora.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Performance.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sucursal.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEmpleado.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VentaAuto.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VentaParte.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +310,7 @@
     <Content Include="FotosCarros\model3.jpg" />
     <Content Include="FotosCarros\ModeloS\Gif1.gif" />
     <Content Include="FotosCarros\ModeloS\gif2.gif" />
+    <Content Include="FotosCarros\ModeloS\model3p.jpg" />
     <Content Include="FotosCarros\ModeloS\models.jpg" />
     <Content Include="FotosCarros\ModeloS\ModelSC.jpg" />
     <Content Include="FotosCarros\ModeloS\modelsW.jpg" />
@@ -244,6 +320,16 @@
     <Content Include="FotosCarros\TeslaLogo.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ConsecionarioDeAutos.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ConsecionarioDeAutos.edmx</DependentUpon>
+      <LastGenOutput>ConsecionarioDeAutos.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ConsecionarioDeAutos.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ConsecionarioDeAutos.edmx</DependentUpon>
+      <LastGenOutput>ConsecionarioDeAutos.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\css\material-dashboard.css.map" />
@@ -454,6 +540,13 @@
     <Content Include="assets\scss\material-dashboard\_variables.scss" />
     <Content Include="Scripts\ej2\ej2.min.js" />
     <Content Include="Scripts\ej2\ej2.min.js.map" />
+    <EntityDeploy Include="Models\ConsecionarioDeAutos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ConsecionarioDeAutos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ConsecionarioDeAutos.edmx.diagram">
+      <DependentUpon>ConsecionarioDeAutos.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -488,7 +581,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
