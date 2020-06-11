@@ -1,150 +1,196 @@
-﻿@{
+﻿@model concesionario.Models.PedirModelos.CarroOrdenar
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using (Ajax.BeginForm("OrdenarC", "Ordenar", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "frmCO", OnSuccess = "SuccessCO", OnBegin = "BeginCOC" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="card">
+        <div class="card-body ">
+            <ul class="nav nav-pills nav-pills-info nav-fill " role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#Personalizar" role="tablist">
+                        Personalizar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#Pago" role="tablist">
+                        Pago
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content tab-space">
+                <div class="tab-pane active" id="Personalizar">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="~/FotosCarros/ModeloS/model3p.jpg" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="row">
 
-<div class="card-body ">
-    <ul class="nav nav-pills nav-pills-info nav-fill " role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#Personalizar" role="tablist">
-                Personalizar
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#Pago" role="tablist">
-                Pago
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content tab-space">
-        <div class="tab-pane active" id="Personalizar">
-            <div class="row">
-                <div class="col-md-8">
-                    <img src="~/FotosCarros/ModeloS/model3p.jpg" />
+                                    <div class="col-md-12">
+                                        <label>Color</label>
+                                        @Html.DropDownListFor(model => model.IdColor, new SelectList(ViewBag.Color, "IdColor", "Color"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Performance</label>
+                                        @Html.DropDownListFor(model => model.IdPerformance, new SelectList(ViewBag.Performance, "IdPerformace", "Performace"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="row">
+                <div class="tab-pane" id="Pago">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Nombre</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Apellido Paterno</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.ApP, new { htmlAttributes = new { @class = "form-control" } })
 
-                            <div class="col-md-12">
-                                <label>Color</label>
-                                @Html.DropDownList("IdColor", new SelectList(ViewBag.Color, "IdColor", "Color"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Apellido Materno</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.ApM, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Edad</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.Edad, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Fecha Nacimiento</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.FechaDeNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Sexo</label>
+                                        <span class="material-input">
+                                            @Html.DropDownListFor(model => model.Sexo, new SelectList(ViewBag.Sexo, "IdSexo", "Sexo"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">RFC</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.RFC, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Performance</label>
-                                @Html.DropDownList("IdPerformace", new SelectList(ViewBag.Performance, "IdPerformace", "Performace"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Direccion</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">CP</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.CP, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Telefono</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Telefono Casa</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.TelefonoCasa, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Correo</label>
+                                        <span class="material-input">
+                                            @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
-
-                </div>
-
-            </div>
-        </div>
-        <div class="tab-pane" id="Pago">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Nombre</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdNombre" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Apellido Paterno</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdApP" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Apellido Materno</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdApM" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Edad</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdEdad" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Fecha Nacimiento</label>
-                        <span class="material-input">
-                            <input type="date" class="form-control" id="IdFecha" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Sexo</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdSexo" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">RFC</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdRFC" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Direccion</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdDireccion" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">CP</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdCP" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Telefono</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdTelefono" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Telefono Casa</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdTelefonoC" />
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Correo</label>
-                        <span class="material-input">
-                            <input type="text" class="form-control" id="IdCorreo" />
-                        </span>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Aceptar" class="btn btn-outline-success pull-right" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
 
+<script>
+    function SuccessCO(data, status, jqXHR) {
+        switch (data.value) {
+            case 1:
+                Swal.fire(
+                    'Correcto!',
+                    data.messen,
+                    'success'
+                );
+                location.reload();
+                break;
+            
+            default:
+                break;
+        }
+
+    };
+    function BeginCOC() {
+        
+    }
+</script>

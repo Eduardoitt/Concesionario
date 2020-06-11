@@ -27,7 +27,7 @@ namespace concesionario.Models
         public string ApM { get; set; }
         public Nullable<int> Edad { get; set; }
         public Nullable<System.DateTime> FechaDeNacimiento { get; set; }
-        public string Sexo { get; set; }
+        public Nullable<int> Sexo { get; set; }
         public string RFC { get; set; }
         public string Direccion { get; set; }
         public Nullable<int> CP { get; set; }
@@ -37,6 +37,7 @@ namespace concesionario.Models
         public Nullable<int> IdAval { get; set; }
     
         public virtual Aval Aval { get; set; }
+        public virtual Sexo Sexo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VentaAuto> VentaAuto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

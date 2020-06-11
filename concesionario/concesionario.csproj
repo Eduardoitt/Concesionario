@@ -202,7 +202,11 @@
     <Compile Include="Models\PartesPrecioBitacora.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PedirModelos\CarroOrdenar.cs" />
     <Compile Include="Models\Performance.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sexo.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sucursal.cs">

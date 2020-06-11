@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7f218ddefe0a4e39a72f6583757ed4e6" Name="Diagram1">
+      <Diagram DiagramId="e181fb29e3934469b413c98a91e2cbb6" Name="Diagram1">
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Anio" Width="1.5" PointX="1.5" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Auto_Adiccionales" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.AutoExistencia" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Autos" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Aval" Width="1.5" PointX="0.75" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Cliente" Width="1.5" PointX="3" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Aval" Width="1.5" PointX="0.75" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Cliente" Width="1.5" PointX="3" PointY="28.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Color" Width="1.5" PointX="1.5" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Consecionario" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Empleado" Width="1.5" PointX="3" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Empleado" Width="1.5" PointX="3" PointY="33.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.EmpleadoSucursal" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Modelo" Width="1.5" PointX="1.5" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Partes" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
@@ -21,8 +21,9 @@
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.PartesPrecio" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.PartesPrecioBitacora" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Performance" Width="1.5" PointX="0.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Sexo" Width="1.5" PointX="0.75" PointY="31.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.Sucursal" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.TipoEmpleado" Width="1.5" PointX="0.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsecionarioDeAutosModel.TipoEmpleado" Width="1.5" PointX="0.75" PointY="34.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.VentaAuto" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsecionarioDeAutosModel.VentaParte" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__Autos__IdAnio__10566F31" ManuallyRouted="false" />
@@ -37,6 +38,7 @@
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__Autos__IdModelo__0F624AF8" ManuallyRouted="false" />
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__VentaAuto__IdAut__18EBB532" ManuallyRouted="false" />
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__Cliente__IdAval__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsecionarioDeAutosModel.FK__Cliente__Sexo__3C34F16F" ManuallyRouted="false" />
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__VentaAuto__IdCli__1AD3FDA4" ManuallyRouted="false" />
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__VentaPart__IdCli__76969D2E" ManuallyRouted="false" />
         <AssociationConnector Association="ConsecionarioDeAutosModel.FK__Sucursal__IdCons__398D8EEE" ManuallyRouted="false" />

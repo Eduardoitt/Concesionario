@@ -63,7 +63,7 @@
           <Property Name="ApM" Type="varchar" MaxLength="30" />
           <Property Name="Edad" Type="int" />
           <Property Name="FechaDeNacimiento" Type="date" />
-          <Property Name="Sexo" Type="varchar" MaxLength="10" />
+          <Property Name="Sexo" Type="int" />
           <Property Name="RFC" Type="varchar" MaxLength="13" />
           <Property Name="Direccion" Type="varchar" MaxLength="50" />
           <Property Name="CP" Type="int" />
@@ -154,6 +154,13 @@
           <Property Name="IdPerformance" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Performance" Type="varchar" MaxLength="60" />
           <Property Name="Precio" Type="decimal" Precision="14" Scale="4" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="IdSexo" />
+          </Key>
+          <Property Name="IdSexo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Sucursal">
           <Key>
@@ -311,6 +318,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="IdAval" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente__Sexo__3C34F16F">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="IdSexo" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="Sexo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -518,6 +537,23 @@
           <Parameter Name="IdPerformace" Type="int" Mode="In" />
           <Parameter Name="IdColor" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_OrdeanarCarro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAuto" Type="int" Mode="In" />
+          <Parameter Name="IdColor" Type="int" Mode="In" />
+          <Parameter Name="IdPerformance" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApP" Type="varchar" Mode="In" />
+          <Parameter Name="ApM" Type="varchar" Mode="In" />
+          <Parameter Name="Edad" Type="int" Mode="In" />
+          <Parameter Name="FechaDeNacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="Sexo" Type="int" Mode="In" />
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+          <Parameter Name="CP" Type="int" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoCasa" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="ConsecionarioDeAutosModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auto_Adiccionales" EntityType="Self.Auto_Adiccionales" Schema="dbo" store:Type="Tables" />
@@ -535,6 +571,7 @@
           <EntitySet Name="PartesPrecio" EntityType="Self.PartesPrecio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartesPrecioBitacora" EntityType="Self.PartesPrecioBitacora" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" Schema="dbo" store:Type="Tables" />
@@ -577,6 +614,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__Cliente__IdAval__5FB337D6" Association="Self.FK__Cliente__IdAval__5FB337D6">
             <End Role="Aval" EntitySet="Aval" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente__Sexo__3C34F16F" Association="Self.FK__Cliente__Sexo__3C34F16F">
+            <End Role="Sexo" EntitySet="Sexo" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK__Empleado__IdTipo__6477ECF3" Association="Self.FK__Empleado__IdTipo__6477ECF3">
@@ -721,7 +762,7 @@
           <Property Name="ApM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Edad" Type="Int32" />
           <Property Name="FechaDeNacimiento" Type="DateTime" Precision="0" />
-          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="Int32" />
           <Property Name="RFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CP" Type="Int32" />
@@ -730,6 +771,7 @@
           <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdAval" Type="Int32" />
           <NavigationProperty Name="Aval" Relationship="Self.FK__Cliente__IdAval__5FB337D6" FromRole="Cliente" ToRole="Aval" />
+          <NavigationProperty Name="Sexo1" Relationship="Self.FK__Cliente__Sexo__3C34F16F" FromRole="Cliente" ToRole="Sexo" />
           <NavigationProperty Name="VentaAuto" Relationship="Self.FK__VentaAuto__IdCli__1AD3FDA4" FromRole="Cliente" ToRole="VentaAuto" />
           <NavigationProperty Name="VentaParte" Relationship="Self.FK__VentaPart__IdCli__76969D2E" FromRole="Cliente" ToRole="VentaParte" />
         </EntityType>
@@ -834,6 +876,14 @@
           <Property Name="Performance1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="Precio" Type="Decimal" Precision="14" Scale="4" />
           <NavigationProperty Name="Auto_Adiccionales" Relationship="Self.FK__Auto_Adic__IdPer__151B244E" FromRole="Performance" ToRole="Auto_Adiccionales" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="IdSexo" />
+          </Key>
+          <Property Name="IdSexo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sexo1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Cliente__Sexo__3C34F16F" FromRole="Sexo" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Sucursal">
           <Key>
@@ -1033,6 +1083,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Cliente__Sexo__3C34F16F">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="IdSexo" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="Sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__VentaAuto__IdCli__1AD3FDA4">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="*" />
@@ -1218,6 +1280,7 @@
           <EntitySet Name="PartesPrecio" EntityType="Self.PartesPrecio" />
           <EntitySet Name="PartesPrecioBitacora" EntityType="Self.PartesPrecioBitacora" />
           <EntitySet Name="Performance" EntityType="Self.Performance" />
+          <EntitySet Name="Sexo" EntityType="Self.Sexo" />
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
           <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" />
           <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" />
@@ -1268,6 +1331,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__Cliente__IdAval__5FB337D6" Association="Self.FK__Cliente__IdAval__5FB337D6">
             <End Role="Aval" EntitySet="Aval" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente__Sexo__3C34F16F" Association="Self.FK__Cliente__Sexo__3C34F16F">
+            <End Role="Sexo" EntitySet="Sexo" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK__VentaAuto__IdCli__1AD3FDA4" Association="Self.FK__VentaAuto__IdCli__1AD3FDA4">
@@ -1337,6 +1404,23 @@
             <Parameter Name="IdAuto" Mode="In" Type="Int32" />
             <Parameter Name="IdPerformace" Mode="In" Type="Int32" />
             <Parameter Name="IdColor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_OrdeanarCarro">
+            <Parameter Name="IdAuto" Mode="In" Type="Int32" />
+            <Parameter Name="IdColor" Mode="In" Type="Int32" />
+            <Parameter Name="IdPerformance" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApP" Mode="In" Type="String" />
+            <Parameter Name="ApM" Mode="In" Type="String" />
+            <Parameter Name="Edad" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDeNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Sexo" Mode="In" Type="Int32" />
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="CP" Mode="In" Type="Int32" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="TelefonoCasa" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -1511,6 +1595,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Sexo">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Sexo">
+              <MappingFragment StoreEntitySet="Sexo">
+                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+                <ScalarProperty Name="Sexo1" ColumnName="Sexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Sucursal">
             <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Sucursal">
               <MappingFragment StoreEntitySet="Sucursal">
@@ -1556,6 +1648,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AutosAlta" FunctionName="ConsecionarioDeAutosModel.Store.AutosAlta" />
           <FunctionImportMapping FunctionImportName="Caracteristicas" FunctionName="ConsecionarioDeAutosModel.Store.Caracteristicas" />
+          <FunctionImportMapping FunctionImportName="SP_OrdeanarCarro" FunctionName="ConsecionarioDeAutosModel.Store.SP_OrdeanarCarro" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

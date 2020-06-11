@@ -43,6 +43,7 @@ namespace concesionario.Models
         public virtual DbSet<PartesPrecio> PartesPrecio { get; set; }
         public virtual DbSet<PartesPrecioBitacora> PartesPrecioBitacora { get; set; }
         public virtual DbSet<Performance> Performance { get; set; }
+        public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<TipoEmpleado> TipoEmpleado { get; set; }
         public virtual DbSet<VentaAuto> VentaAuto { get; set; }
@@ -88,6 +89,71 @@ namespace concesionario.Models
                 new ObjectParameter("IdColor", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Caracteristicas", idAutoParameter, idPerformaceParameter, idColorParameter);
+        }
+    
+        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo)
+        {
+            var idAutoParameter = idAuto.HasValue ?
+                new ObjectParameter("IdAuto", idAuto) :
+                new ObjectParameter("IdAuto", typeof(int));
+    
+            var idColorParameter = idColor.HasValue ?
+                new ObjectParameter("IdColor", idColor) :
+                new ObjectParameter("IdColor", typeof(int));
+    
+            var idPerformanceParameter = idPerformance.HasValue ?
+                new ObjectParameter("IdPerformance", idPerformance) :
+                new ObjectParameter("IdPerformance", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apPParameter = apP != null ?
+                new ObjectParameter("ApP", apP) :
+                new ObjectParameter("ApP", typeof(string));
+    
+            var apMParameter = apM != null ?
+                new ObjectParameter("ApM", apM) :
+                new ObjectParameter("ApM", typeof(string));
+    
+            var edadParameter = edad.HasValue ?
+                new ObjectParameter("Edad", edad) :
+                new ObjectParameter("Edad", typeof(int));
+    
+            var fechaDeNacimientoParameter = fechaDeNacimiento.HasValue ?
+                new ObjectParameter("FechaDeNacimiento", fechaDeNacimiento) :
+                new ObjectParameter("FechaDeNacimiento", typeof(System.DateTime));
+    
+            var sexoParameter = sexo.HasValue ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(int));
+    
+            var rFCParameter = rFC != null ?
+                new ObjectParameter("RFC", rFC) :
+                new ObjectParameter("RFC", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var cPParameter = cP.HasValue ?
+                new ObjectParameter("CP", cP) :
+                new ObjectParameter("CP", typeof(int));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var telefonoCasaParameter = telefonoCasa != null ?
+                new ObjectParameter("TelefonoCasa", telefonoCasa) :
+                new ObjectParameter("TelefonoCasa", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter);
         }
     }
 }
