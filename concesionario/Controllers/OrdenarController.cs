@@ -14,20 +14,20 @@ namespace concesionario.Controllers
     {
         // GET: Ordenar
         private ConsecionarioDeAutosEntities db = new ConsecionarioDeAutosEntities();
-        public ActionResult Index(int IdAuto)
+        public ActionResult Index()
         {
-            Session["IdAuto"] = IdAuto;
+           
             ViewBag.Performance = (from p in db.Performance
                                    select new
                                    {
-                                       IdPerformace = p.IdPerformance,
-                                       Performace = p.Performance1 + " " + p.Precio,
+                                       IdPerformance = p.IdPerformance,
+                                       Performance = p.Performance1 + " $" + p.Precio,
                                    }).ToList();
             ViewBag.Color = (from c in db.Color
                              select new
                              {
                                  IdColor = c.IdColor,
-                                 Color = c.Color1 + " " + c.Precio,
+                                 Color = c.Color1 + " $" + c.Precio,
                              }).ToList();
             ViewBag.Sexo = (from s in db.Sexo
                             select new
@@ -37,16 +37,40 @@ namespace concesionario.Controllers
                             }).ToList();
             ViewBag.IdMesExpiracion = (from m in db.MesExpiracion
                                        select new
-                            {
+                                       {
                                            IdMesExpiracion = m.IdMesExpiracion,
                                            MesExpiracion = m.MesExpiracion1
-                            }).ToList();
-            ViewBag.IdFechaExpiracion = (from m in db.FechaExpiracion
-                                       select new
-                                       {
-                                           IdFechaExpiracion = m.IdFechaExpiracion,
-                                           FechaExpiracion = m.FechaExpiracion1
                                        }).ToList();
+            ViewBag.IdFechaExpiracion = (from m in db.FechaExpiracion
+                                         select new
+                                         {
+                                             IdFechaExpiracion = m.IdFechaExpiracion,
+                                             FechaExpiracion = m.FechaExpiracion1
+                                         }).ToList();
+            ViewBag.IdTiempodePago = (from t in db.TiempoDePago
+                                      select new
+                                      {
+                                          IdTiempo=t.IdTiempoDePago,
+                                          Tiempo=t.TiempoDePago1
+
+                                      }).ToList();
+
+            ViewBag.Anio = (from A in db.Autos join AA in  db.Anio on A.IdAnio equals AA.IdAnio join M in db.Modelo on  A.IdModelo equals  M.IdModelo where  A.IdModelo == 1
+                            
+                                      select new
+                                      {
+                                          IdAutos = A.IdAutos,                                     
+                                          Precio = AA.Anio1+" $"+A.Precio
+
+                                      }).ToList();
+            ViewBag.Sucursal = (from s in db.Sucursal
+                                      select new
+                                      {
+                                          IdSucursal = s.IdSucursal,
+                                          Sucursal = s.Direccion
+
+                                      }).ToList();
+
             return View("Index");
         }
 
@@ -61,7 +85,7 @@ namespace concesionario.Controllers
                 }
                 else
                 {
-                    model.IdAuto = Convert.ToInt32(Session["IdAuto"]);
+                    
                     db.SP_OrdeanarCarro(model.IdAuto, model.IdColor, model.IdPerformance, model.Nombre, model.ApP, model.ApM, model.Edad, model.FechaDeNacimiento, model.Sexo, model.RFC, model.Direccion,
                         model.CP, model.Telefono, model.TelefonoCasa, model.Correo, model.NombreEnTC, model.NoTarjetaC, model.IdMesExpiracion, model.IdFechaExpiracion, model.CVV, model.CPFacturacion, model.IdTiempoDePago);
                     // return Json(new { value = 1, messen = "Carro Ordenado" }, JsonRequestBehavior.AllowGet);
