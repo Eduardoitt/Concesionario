@@ -2,6 +2,13 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .contenedor {
+        padding: 5px 20px 15px 20px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+    }
+</style>
 
 @using (Ajax.BeginForm("OrdenarC", "Ordenar", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "frmCO", OnSuccess = "SuccessCO", OnBegin = "BeginCOC" }))
 {
@@ -53,112 +60,179 @@
                 <div class="tab-pane" id="Pago">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Nombre</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
+                            <div class="contenedor">
+                                <h3>Datos Personales</h3>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Nombre</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Apellido Paterno</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.ApP, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Apellido Paterno</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.ApP, new { htmlAttributes = new { @class = "form-control" } })
 
-                                        </span>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Apellido Materno</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.ApM, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Apellido Materno</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.ApM, new { htmlAttributes = new { @class = "form-control" } })
 
-                                        </span>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Edad</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.Edad, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Edad</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.Edad, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Fecha Nacimiento</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.FechaDeNacimiento, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Fecha Nacimiento</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.FechaDeNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Sexo</label>
-                                        <span class="material-input">
-                                            @Html.DropDownListFor(model => model.Sexo, new SelectList(ViewBag.Sexo, "IdSexo", "Sexo"), htmlAttributes: new { @class = "custom-select custom-select-md " })
-                                        </span>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Sexo</label>
+                                            <span class="material-input">
+                                                @Html.DropDownListFor(model => model.Sexo, new SelectList(ViewBag.Sexo, "IdSexo", "Sexo"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">RFC</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.RFC, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">RFC</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.RFC, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Direccion</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">CP</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.CP, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Telefono</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Nombre  en TC</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.NombreEnTC, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Telefono Casa</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.TelefonoCasa, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Correo</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Direccion</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="contenedor">
+                                <h3>Datos Financieros</h3>
+                                <div class="row">
+                                  
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label">  Nombre Que Aparece En La Tarjeta  </label>
+                                                <span class="material-input">
+                                                    @Html.EditorFor(model => model.NombreEnTC, new { htmlAttributes = new { @class = "form-control" } })
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"> Número De Tarjeta De Crédito</label>
+                                                <span class="material-input">
+                                                    @Html.EditorFor(model => model.NoTarjetaC, new { htmlAttributes = new { @class = "form-control" } })
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"> Mes De Expiración</label>
+                                                <span class="material-input">
+                                                    @Html.DropDownListFor(model => model.IdMesExpiracion, new SelectList(ViewBag.IdMesExpiracion, "IdMesExpiracion", "MesExpiracion"), htmlAttributes: new { @class = "custom-select custom-select-md " })
+                                                   
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"> Fecha De Expiración</label>
+                                                <span class="material-input">
+                                                    @Html.DropDownListFor(model => model.IdFechaExpiracion, new SelectList(ViewBag.IdFechaExpiracion, "IdFechaExpiracion", "FechaExpiracion"), htmlAttributes: new { @class = "custom-select custom-select-md " })
 
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">CP</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.CP, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Telefono</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Telefono Casa</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.TelefonoCasa, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Correo</label>
-                                        <span class="material-input">
-                                            @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
-                                        </span>
-                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"> CVV</label>
+                                                <span class="material-input">
+                                                    @Html.EditorFor(model => model.CVV, new { htmlAttributes = new { @class = "form-control" } })
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"> Código Postal De Facturación</label>
+                                                <span class="material-input">
+                                                    @Html.EditorFor(model => model.CPFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+                                    
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <hr />
@@ -184,13 +258,13 @@
                 );
                 location.reload();
                 break;
-            
+
             default:
                 break;
         }
 
     };
     function BeginCOC() {
-        
+
     }
 </script>

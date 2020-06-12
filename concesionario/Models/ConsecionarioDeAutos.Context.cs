@@ -48,6 +48,11 @@ namespace concesionario.Models
         public virtual DbSet<TipoEmpleado> TipoEmpleado { get; set; }
         public virtual DbSet<VentaAuto> VentaAuto { get; set; }
         public virtual DbSet<VentaParte> VentaParte { get; set; }
+        public virtual DbSet<BitacoraDePago> BitacoraDePago { get; set; }
+        public virtual DbSet<DatosFinanciamiento> DatosFinanciamiento { get; set; }
+        public virtual DbSet<FechaExpiracion> FechaExpiracion { get; set; }
+        public virtual DbSet<MesExpiracion> MesExpiracion { get; set; }
+        public virtual DbSet<TiempoDePago> TiempoDePago { get; set; }
     
         public virtual int AutosAlta(string marca, Nullable<int> idColor, Nullable<int> idModelo, Nullable<int> idAnio, Nullable<decimal> precio)
         {
@@ -91,7 +96,7 @@ namespace concesionario.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Caracteristicas", idAutoParameter, idPerformaceParameter, idColorParameter);
         }
     
-        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo)
+        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo, string nombreEnTC, string noTarjetaC, Nullable<int> idMesExpiracion, Nullable<int> idFechaExpiracion, string cVV, Nullable<int> cPFacturacion, Nullable<int> idTiempoDePago)
         {
             var idAutoParameter = idAuto.HasValue ?
                 new ObjectParameter("IdAuto", idAuto) :
@@ -153,7 +158,35 @@ namespace concesionario.Models
                 new ObjectParameter("Correo", correo) :
                 new ObjectParameter("Correo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter);
+            var nombreEnTCParameter = nombreEnTC != null ?
+                new ObjectParameter("NombreEnTC", nombreEnTC) :
+                new ObjectParameter("NombreEnTC", typeof(string));
+    
+            var noTarjetaCParameter = noTarjetaC != null ?
+                new ObjectParameter("NoTarjetaC", noTarjetaC) :
+                new ObjectParameter("NoTarjetaC", typeof(string));
+    
+            var idMesExpiracionParameter = idMesExpiracion.HasValue ?
+                new ObjectParameter("IdMesExpiracion", idMesExpiracion) :
+                new ObjectParameter("IdMesExpiracion", typeof(int));
+    
+            var idFechaExpiracionParameter = idFechaExpiracion.HasValue ?
+                new ObjectParameter("IdFechaExpiracion", idFechaExpiracion) :
+                new ObjectParameter("IdFechaExpiracion", typeof(int));
+    
+            var cVVParameter = cVV != null ?
+                new ObjectParameter("CVV", cVV) :
+                new ObjectParameter("CVV", typeof(string));
+    
+            var cPFacturacionParameter = cPFacturacion.HasValue ?
+                new ObjectParameter("CPFacturacion", cPFacturacion) :
+                new ObjectParameter("CPFacturacion", typeof(int));
+    
+            var idTiempoDePagoParameter = idTiempoDePago.HasValue ?
+                new ObjectParameter("IdTiempoDePago", idTiempoDePago) :
+                new ObjectParameter("IdTiempoDePago", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter, nombreEnTCParameter, noTarjetaCParameter, idMesExpiracionParameter, idFechaExpiracionParameter, cVVParameter, cPFacturacionParameter, idTiempoDePagoParameter);
         }
     }
 }

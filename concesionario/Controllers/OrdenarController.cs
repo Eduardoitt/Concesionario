@@ -35,6 +35,18 @@ namespace concesionario.Controllers
                                 IdSexo = s.IdSexo,
                                 Sexo = s.Sexo1
                             }).ToList();
+            ViewBag.IdMesExpiracion = (from m in db.MesExpiracion
+                                       select new
+                            {
+                                           IdMesExpiracion = m.IdMesExpiracion,
+                                           MesExpiracion = m.MesExpiracion1
+                            }).ToList();
+            ViewBag.IdFechaExpiracion = (from m in db.FechaExpiracion
+                                       select new
+                                       {
+                                           IdFechaExpiracion = m.IdFechaExpiracion,
+                                           FechaExpiracion = m.FechaExpiracion1
+                                       }).ToList();
             return View("Index");
         }
 
@@ -50,12 +62,13 @@ namespace concesionario.Controllers
                 else
                 {
                     model.IdAuto = Convert.ToInt32(Session["IdAuto"]);
-                    db.SP_OrdeanarCarro(model.IdAuto,model.IdColor,model.IdPerformance,model.Nombre,model.ApP,model.ApM,model.Edad,model.FechaDeNacimiento,model.Sexo,model.RFC,model.Direccion,
-                        model.CP,model.Telefono,model.TelefonoCasa,model.Correo);
+                    db.SP_OrdeanarCarro(model.IdAuto, model.IdColor, model.IdPerformance, model.Nombre, model.ApP, model.ApM, model.Edad, model.FechaDeNacimiento, model.Sexo, model.RFC, model.Direccion,
+                        model.CP, model.Telefono, model.TelefonoCasa, model.Correo, model.NombreEnTC, model.NoTarjetaC, model.IdMesExpiracion, model.IdFechaExpiracion, model.CVV, model.CPFacturacion, model.IdTiempoDePago);
                     // return Json(new { value = 1, messen = "Carro Ordenado" }, JsonRequestBehavior.AllowGet);
-                    return RedirectToAction("Index","Ordenar", new { IdAuto=1});
+                    return RedirectToAction("Index", "Ordenar", new { IdAuto = 1 });
                 }
             }
+
             catch
             {
                 return PartialView(model);

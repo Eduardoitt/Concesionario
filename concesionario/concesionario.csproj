@@ -157,6 +157,9 @@
     <Compile Include="Models\Aval.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BitacoraDePago.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
@@ -181,10 +184,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConsecionarioDeAutos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatosFinanciamiento.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Empleado.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpleadoSucursal.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FechaExpiracion.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MesExpiracion.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Modelo.cs">
@@ -210,6 +222,9 @@
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sucursal.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiempoDePago.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoEmpleado.cs">

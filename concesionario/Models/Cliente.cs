@@ -19,6 +19,7 @@ namespace concesionario.Models
         {
             this.VentaAuto = new HashSet<VentaAuto>();
             this.VentaParte = new HashSet<VentaParte>();
+            this.DatosFinanciamiento = new HashSet<DatosFinanciamiento>();
         }
     
         public int IdCliente { get; set; }
@@ -42,5 +43,7 @@ namespace concesionario.Models
         public virtual ICollection<VentaAuto> VentaAuto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VentaParte> VentaParte { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DatosFinanciamiento> DatosFinanciamiento { get; set; }
     }
 }

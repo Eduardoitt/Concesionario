@@ -12,28 +12,18 @@ namespace concesionario.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class VentaAuto
+    public partial class FechaExpiracion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public VentaAuto()
+        public FechaExpiracion()
         {
-            this.BitacoraDePago = new HashSet<BitacoraDePago>();
+            this.DatosFinanciamiento = new HashSet<DatosFinanciamiento>();
         }
     
-        public int IdVentaAuto { get; set; }
-        public int IdEmpleado { get; set; }
-        public int IdAutos { get; set; }
-        public int IdAuto_Adic { get; set; }
-        public int IdCliente { get; set; }
-        public int IdSucursal { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        public int IdFechaExpiracion { get; set; }
+        public Nullable<int> FechaExpiracion1 { get; set; }
     
-        public virtual Auto_Adiccionales Auto_Adiccionales { get; set; }
-        public virtual Autos Autos { get; set; }
-        public virtual Cliente Cliente { get; set; }
-        public virtual Empleado Empleado { get; set; }
-        public virtual Sucursal Sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BitacoraDePago> BitacoraDePago { get; set; }
+        public virtual ICollection<DatosFinanciamiento> DatosFinanciamiento { get; set; }
     }
 }

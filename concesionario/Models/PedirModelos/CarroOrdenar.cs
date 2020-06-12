@@ -10,6 +10,14 @@ namespace concesionario.Models.PedirModelos
     using System.ComponentModel.DataAnnotations;
     public class CarroOrdenar
     {
+        public string NombreEnTC { get; set; }
+        public string NoTarjetaC { get; set; }
+        public int IdMesExpiracion { get; set; }
+        public int IdFechaExpiracion { get; set; }
+        public string CVV { get; set; }
+        public int CPFacturacion { get; set; }
+        public int IdTiempoDePago { get; set; }
+        //
         public int IdAuto { get; set; }
         public int IdColor { get; set; }
         public int IdPerformance { get; set; }
@@ -23,10 +31,13 @@ namespace concesionario.Models.PedirModelos
         public Nullable<System.DateTime> FechaDeNacimiento { get; set; }
         public int Sexo { get; set; }
         public string RFC { get; set; }
-        public string Direccion { get; set; }
+        public string Direccion { get; set; } 
         public int CP { get; set; }
         public string Telefono { get; set; }
         public string TelefonoCasa { get; set; }
         public string Correo { get; set; }
+        //
+      
+
     }
 }

@@ -221,5 +221,58 @@
     <FunctionImportMapping FunctionImportName="AutosAlta" FunctionName="ConsecionarioDeAutosModel.Store.AutosAlta" />
     <FunctionImportMapping FunctionImportName="Caracteristicas" FunctionName="ConsecionarioDeAutosModel.Store.Caracteristicas" />
     <FunctionImportMapping FunctionImportName="SP_OrdeanarCarro" FunctionName="ConsecionarioDeAutosModel.Store.SP_OrdeanarCarro" />
+    <EntitySetMapping Name="BitacoraDePago">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.BitacoraDePago">
+        <MappingFragment StoreEntitySet="BitacoraDePago">
+          <ScalarProperty Name="Restante" ColumnName="Restante" />
+          <ScalarProperty Name="IdVentaAuto" ColumnName="IdVentaAuto" />
+          <ScalarProperty Name="PagoMinimo" ColumnName="PagoMinimo" />
+          <ScalarProperty Name="Abono" ColumnName="Abono" />
+          <ScalarProperty Name="FechaDePago" ColumnName="FechaDePago" />
+          <ScalarProperty Name="id_Bitacora" ColumnName="id_Bitacora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosFinanciamiento">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.DatosFinanciamiento">
+        <MappingFragment StoreEntitySet="DatosFinanciamiento">
+          <ScalarProperty Name="IdTiempoDePago" ColumnName="IdTiempoDePago" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="PrimerPago" ColumnName="PrimerPago" />
+          <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+          <ScalarProperty Name="CPFacturacion" ColumnName="CPFacturacion" />
+          <ScalarProperty Name="CVV" ColumnName="CVV" />
+          <ScalarProperty Name="IdFechaExpiracion" ColumnName="IdFechaExpiracion" />
+          <ScalarProperty Name="IdMesExpiracion" ColumnName="IdMesExpiracion" />
+          <ScalarProperty Name="NoTarjetaC" ColumnName="NoTarjetaC" />
+          <ScalarProperty Name="NombreEnTC" ColumnName="NombreEnTC" />
+          <ScalarProperty Name="IdDatosFinanciamiento" ColumnName="IdDatosFinanciamiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FechaExpiracion">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.FechaExpiracion">
+        <MappingFragment StoreEntitySet="FechaExpiracion">
+          <ScalarProperty Name="FechaExpiracion1" ColumnName="FechaExpiracion" />
+          <ScalarProperty Name="IdFechaExpiracion" ColumnName="IdFechaExpiracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MesExpiracion">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.MesExpiracion">
+        <MappingFragment StoreEntitySet="MesExpiracion">
+          <ScalarProperty Name="MesExpiracion1" ColumnName="MesExpiracion" />
+          <ScalarProperty Name="IdMesExpiracion" ColumnName="IdMesExpiracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiempoDePago">
+      <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.TiempoDePago">
+        <MappingFragment StoreEntitySet="TiempoDePago">
+          <ScalarProperty Name="TiempoDePago1" ColumnName="TiempoDePago" />
+          <ScalarProperty Name="IdTiempoDePago" ColumnName="IdTiempoDePago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
