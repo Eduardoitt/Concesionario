@@ -8,6 +8,7 @@ using concesionario.Models.PedirModelos;
 using Newtonsoft.Json;
 using System.Data.Entity.Core.Objects;
 
+
 namespace concesionario.Controllers
 {
     public class OrdenarController : Controller
@@ -74,7 +75,7 @@ namespace concesionario.Controllers
             
             return View("Index");
         }
-
+        
         [HttpPost]
         public ActionResult Index(CarroOrdenar model)
         {
@@ -91,8 +92,8 @@ namespace concesionario.Controllers
                     db.SP_OrdeanarCarro(model.IdAuto, model.IdColor, model.IdPerformance, model.Nombre, model.ApP, model.ApM, model.Edad, model.FechaDeNacimiento, model.Sexo, model.RFC, model.Direccion,
                         model.CP, model.Telefono, model.TelefonoCasa, model.Correo, model.NombreEnTC, model.NoTarjetaC, model.IdMesExpiracion, model.IdFechaExpiracion, model.CVV, model.CPFacturacion,
                         model.IdTiempoDePago,model.IdSucursal);
-                    // return Json(new { value = 1, messen = "Carro Ordenado" }, JsonRequestBehavior.AllowGet);
-                    return RedirectToAction("Index", "Home");
+                    return Json(new { value = 1, messen = "Carro Ordenado" }, JsonRequestBehavior.AllowGet);
+                    //return RedirectToAction("Index", "Home");
                 }
             }
 
