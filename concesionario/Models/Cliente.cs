@@ -17,9 +17,9 @@ namespace concesionario.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
+            this.DatosFinanciamiento = new HashSet<DatosFinanciamiento>();
             this.VentaAuto = new HashSet<VentaAuto>();
             this.VentaParte = new HashSet<VentaParte>();
-            this.DatosFinanciamiento = new HashSet<DatosFinanciamiento>();
         }
     
         public int IdCliente { get; set; }
@@ -40,10 +40,10 @@ namespace concesionario.Models
         public virtual Aval Aval { get; set; }
         public virtual Sexo Sexo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DatosFinanciamiento> DatosFinanciamiento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VentaAuto> VentaAuto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VentaParte> VentaParte { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DatosFinanciamiento> DatosFinanciamiento { get; set; }
     }
 }

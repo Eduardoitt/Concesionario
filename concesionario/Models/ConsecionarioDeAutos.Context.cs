@@ -32,11 +32,15 @@ namespace concesionario.Models
         public virtual DbSet<AutoExistencia> AutoExistencia { get; set; }
         public virtual DbSet<Autos> Autos { get; set; }
         public virtual DbSet<Aval> Aval { get; set; }
+        public virtual DbSet<BitacoraDePago> BitacoraDePago { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Consecionario> Consecionario { get; set; }
+        public virtual DbSet<DatosFinanciamiento> DatosFinanciamiento { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<EmpleadoSucursal> EmpleadoSucursal { get; set; }
+        public virtual DbSet<FechaExpiracion> FechaExpiracion { get; set; }
+        public virtual DbSet<MesExpiracion> MesExpiracion { get; set; }
         public virtual DbSet<Modelo> Modelo { get; set; }
         public virtual DbSet<Partes> Partes { get; set; }
         public virtual DbSet<PartesInventario> PartesInventario { get; set; }
@@ -45,14 +49,10 @@ namespace concesionario.Models
         public virtual DbSet<Performance> Performance { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
+        public virtual DbSet<TiempoDePago> TiempoDePago { get; set; }
         public virtual DbSet<TipoEmpleado> TipoEmpleado { get; set; }
         public virtual DbSet<VentaAuto> VentaAuto { get; set; }
         public virtual DbSet<VentaParte> VentaParte { get; set; }
-        public virtual DbSet<BitacoraDePago> BitacoraDePago { get; set; }
-        public virtual DbSet<DatosFinanciamiento> DatosFinanciamiento { get; set; }
-        public virtual DbSet<FechaExpiracion> FechaExpiracion { get; set; }
-        public virtual DbSet<MesExpiracion> MesExpiracion { get; set; }
-        public virtual DbSet<TiempoDePago> TiempoDePago { get; set; }
     
         public virtual int AutosAlta(string marca, Nullable<int> idColor, Nullable<int> idModelo, Nullable<int> idAnio, Nullable<decimal> precio)
         {
