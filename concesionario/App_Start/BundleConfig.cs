@@ -22,9 +22,15 @@ namespace concesionario
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css")
+                .Include("~/assets/js/plugins/sweetalert2.js")
+                .Include("~/Scripts/jquery.validate.unobtrusive.js")
+                .Include("~/Scripts/jquery.unobtrusive-ajax.js")
+                );
+            
         }
     }
 }

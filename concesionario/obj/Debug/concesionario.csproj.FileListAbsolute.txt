@@ -365,3 +365,4 @@ C:\Users\52664\Desktop\Concesionario\Concesionario\concesionario\obj\Debug\conce
 C:\Users\52664\Desktop\Concesionario\Concesionario\concesionario\obj\Debug\concesionario.csproj.CopyComplete
 C:\Users\52664\Desktop\Concesionario\Concesionario\concesionario\obj\Debug\concesionario.dll
 C:\Users\52664\Desktop\Concesionario\Concesionario\concesionario\obj\Debug\concesionario.pdb
+C:\Users\52664\Desktop\Concesionario\Concesionario\concesionario\obj\Debug\concesionario.csprojAssemblyReference.cache
