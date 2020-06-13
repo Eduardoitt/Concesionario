@@ -741,6 +741,7 @@
       <Parameter Name="CVV" Mode="In" Type="String" />
       <Parameter Name="CPFacturacion" Mode="In" Type="Int32" />
       <Parameter Name="IdTiempoDePago" Mode="In" Type="Int32" />
+      <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="BitacoraDePago" EntityType="ConsecionarioDeAutosModel.BitacoraDePago" />
     <EntitySet Name="DatosFinanciamiento" EntityType="ConsecionarioDeAutosModel.DatosFinanciamiento" />

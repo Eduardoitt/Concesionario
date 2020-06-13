@@ -10,9 +10,8 @@ namespace concesionario.Models.PedirModelos
     using System.ComponentModel.DataAnnotations;
     public class CarroOrdenar
     {
-        
-        public decimal Abono { get; set; }
-        public string IdSucursal { get; set; }
+       
+        public int IdSucursal { get; set; }
         public string NombreEnTC { get; set; }
         public string NoTarjetaC { get; set; }
         public int IdMesExpiracion { get; set; }

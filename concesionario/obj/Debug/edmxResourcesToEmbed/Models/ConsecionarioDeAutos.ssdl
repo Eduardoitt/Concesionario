@@ -663,6 +663,7 @@
     <Parameter Name="CVV" Type="varchar" Mode="In" />
     <Parameter Name="CPFacturacion" Type="int" Mode="In" />
     <Parameter Name="IdTiempoDePago" Type="int" Mode="In" />
+    <Parameter Name="IdSucursal" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="ConsecionarioDeAutosModelStoreContainer">
     <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />

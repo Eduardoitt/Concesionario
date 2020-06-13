@@ -96,7 +96,7 @@ namespace concesionario.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Caracteristicas", idAutoParameter, idPerformaceParameter, idColorParameter);
         }
     
-        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo, string nombreEnTC, string noTarjetaC, Nullable<int> idMesExpiracion, Nullable<int> idFechaExpiracion, string cVV, Nullable<int> cPFacturacion, Nullable<int> idTiempoDePago)
+        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo, string nombreEnTC, string noTarjetaC, Nullable<int> idMesExpiracion, Nullable<int> idFechaExpiracion, string cVV, Nullable<int> cPFacturacion, Nullable<int> idTiempoDePago, Nullable<int> idSucursal)
         {
             var idAutoParameter = idAuto.HasValue ?
                 new ObjectParameter("IdAuto", idAuto) :
@@ -186,7 +186,11 @@ namespace concesionario.Models
                 new ObjectParameter("IdTiempoDePago", idTiempoDePago) :
                 new ObjectParameter("IdTiempoDePago", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter, nombreEnTCParameter, noTarjetaCParameter, idMesExpiracionParameter, idFechaExpiracionParameter, cVVParameter, cPFacturacionParameter, idTiempoDePagoParameter);
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter, nombreEnTCParameter, noTarjetaCParameter, idMesExpiracionParameter, idFechaExpiracionParameter, cVVParameter, cPFacturacionParameter, idTiempoDePagoParameter, idSucursalParameter);
         }
     }
 }
