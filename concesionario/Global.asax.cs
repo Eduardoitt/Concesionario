@@ -12,6 +12,7 @@ namespace concesionario
     {
         protected void Application_Start()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjcxNTE4QDMxMzgyZTMxMmUzMFBPNjdpU0xTYXJPTWZrK0pVMkRjaHZsMHNLVDdFaW5XdndBRDBPcnVSZVU9");
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

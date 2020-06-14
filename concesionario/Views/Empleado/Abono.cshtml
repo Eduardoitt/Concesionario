@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout Empleado.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header card-header-info card-header-text h4">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4 class="card-title">Abonos</h4>
+            </div>
+            <div class="card-body ">
+                <div class="row col-md-12">
+                    
+                </div>
+                <br />
+                <div class="row">
+
+                    <div class="col-md-12">
+                        @Html.EJS().Grid("Grid").AllowResizing(true).AllowTextWrap().AllowSorting().AllowFiltering().Width("auto").AllowResizing().Columns(col =>
+                        {
+                            col.Field("id_Bitacora").HeaderText("id_Bitacora").IsPrimaryKey(true).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Visible(false).Add();
+                            col.Field("Nombre").HeaderText("Nombre").Visible(true).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("FechaDePago").HeaderText("FechaDePago").Format("yMd").Type("Date").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("Abono").HeaderText("Abono").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("PagoMinimo").HeaderText("PagoMinimo").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("IdVentaAuto").HeaderText("IdVentaAuto").Visible(false).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("Restante").HeaderText("Restante").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("IdCliente").HeaderText("IdCliente").Visible(false).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();                           
+                            col.HeaderText("Agregar").Template("#Opciones2").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                        }).AllowPaging().SelectionSettings(select => select.Type(Syncfusion.EJ2.Grids.SelectionType.Single)).PageSettings(page => page.PageSize(10)).Locale("es-mx").Render()
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="Opciones2" type="text/x-template">
+    
+    <div class="btn-group">
+        <a class="text-info" href="javascript:void(0)" onclick="AddLicencia(${IdCte_Ideti})" data-toggle="tooltip" data-placement="top" title="Agregar Licencia">
+            <i class="material-icons">add</i>
+        </a>
+        <a class="text-info" href="javascript:void(0)" onclick="UpdateCliente(${IdCte_Ideti})" data-toggle="tooltip" data-placement="top" title="Actualizar Cliente">
+            <i class="material-icons">create</i>
+        </a>
+        <a class="text-info h4" href="javascript:void(0)" onclick="Agregar_Login(${IdCte_Ideti})" data-toggle="tooltip" data-placement="top" title="Generar Login">
+            <i class="fas fa-key"></i>
+        </a>
+    </div>
+    
+
+
+</script>
+<script>
+    $(function () {
+        $.get('@Url.Action("gridabono", "Empleado")', function (data) {
+            var grid = document.getElementById('Grid').ej2_instances[0]; // Grid instance
+            grid.dataSource = JSON.parse(data);
+        });
+    });
+</script>

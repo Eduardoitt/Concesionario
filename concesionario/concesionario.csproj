@@ -136,7 +136,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Bitacora.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModelosController.cs" />
     <Compile Include="Controllers\OrdenarController.cs" />
     <Compile Include="Global.asax.cs">
@@ -199,6 +202,7 @@
     <Compile Include="Models\FechaExpiracion.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\MesExpiracion.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
@@ -224,7 +228,19 @@
     <Compile Include="Models\Sexo.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Login_Result.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sucursal.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiempoDePago.cs">
@@ -233,9 +249,16 @@
     <Compile Include="Models\TipoEmpleado.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsuarioLogin.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendido.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VentaAuto.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VentaAutoGrid.cs" />
     <Compile Include="Models\VentaParte.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
@@ -331,6 +354,7 @@
     <Content Include="Content\ej2\material.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="FotosCarros\loading.svg" />
     <Content Include="FotosCarros\cybertruck.jpg" />
     <Content Include="FotosCarros\CyberTruck\cyber.jpg" />
     <Content Include="FotosCarros\CyberTruck\CyberA.gif" />
@@ -633,6 +657,12 @@
     <Content Include="Views\Ordenar\Index3.cshtml" />
     <Content Include="Views\Ordenar\IndexX.cshtml" />
     <Content Include="Views\Ordenar\IndexC.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout Empleado.cshtml" />
+    <Content Include="Views\Empleado\Index.cshtml" />
+    <Content Include="Views\Empleado\Abono.cshtml" />
+    <Content Include="Views\Empleado\VentaAuto.cshtml" />
+    <Content Include="Views\Empleado\Traspaso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

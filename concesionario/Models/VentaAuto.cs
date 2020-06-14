@@ -21,12 +21,13 @@ namespace concesionario.Models
         }
     
         public int IdVentaAuto { get; set; }
-        public int IdEmpleado { get; set; }
+        public Nullable<int> IdEmpleado { get; set; }
         public int IdAutos { get; set; }
         public int IdAuto_Adic { get; set; }
         public int IdCliente { get; set; }
         public int IdSucursal { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<int> IdVendido { get; set; }
     
         public virtual Auto_Adiccionales Auto_Adiccionales { get; set; }
         public virtual Autos Autos { get; set; }
@@ -35,5 +36,6 @@ namespace concesionario.Models
         public virtual Cliente Cliente { get; set; }
         public virtual Empleado Empleado { get; set; }
         public virtual Sucursal Sucursal { get; set; }
+        public virtual Vendido Vendido { get; set; }
     }
 }

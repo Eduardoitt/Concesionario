@@ -30,8 +30,10 @@ namespace concesionario.Models
         public string Correo { get; set; }
         public string RFC { get; set; }
         public Nullable<int> IdTipoEmpleado { get; set; }
+        public Nullable<int> IdUsuarioLogin { get; set; }
     
         public virtual TipoEmpleado TipoEmpleado { get; set; }
+        public virtual UsuarioLogin UsuarioLogin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpleadoSucursal> EmpleadoSucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
