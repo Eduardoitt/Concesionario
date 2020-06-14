@@ -30,10 +30,10 @@ namespace concesionario.Models
     
         public virtual Auto_Adiccionales Auto_Adiccionales { get; set; }
         public virtual Autos Autos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BitacoraDePago> BitacoraDePago { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Empleado Empleado { get; set; }
         public virtual Sucursal Sucursal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BitacoraDePago> BitacoraDePago { get; set; }
     }
 }

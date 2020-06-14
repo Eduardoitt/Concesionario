@@ -187,6 +187,9 @@
     <Compile Include="Models\DatosFinanciamiento.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB_Errors.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Empleado.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
@@ -234,6 +237,9 @@
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VentaParte.cs">
+      <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZonaHoraria.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -326,7 +332,20 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="FotosCarros\cybertruck.jpg" />
-    <Content Include="FotosCarros\model3.jpg" />
+    <Content Include="FotosCarros\CyberTruck\cyber.jpg" />
+    <Content Include="FotosCarros\CyberTruck\CyberA.gif" />
+    <Content Include="FotosCarros\CyberTruck\CyberP.gif" />
+    <Content Include="FotosCarros\CyberTruck\tesla-cybertruck.jpeg" />
+    <Content Include="FotosCarros\Modelo3\Mod3.jpg" />
+    <Content Include="FotosCarros\Modelo3\modelo03.gif" />
+    <Content Include="FotosCarros\Modelo3\modelo03.jpg" />
+    <Content Include="FotosCarros\Modelo3\modelo3.gif" />
+    <Content Include="FotosCarros\Modelo3\modelo3B.jpg" />
+    <Content Include="FotosCarros\Modelo3\modelo3C.jpg" />
+    <Content Include="FotosCarros\Modelo3\Modelo3E.gif" />
+    <Content Include="FotosCarros\Modelo3\modelo3P.jpg" />
+    <Content Include="FotosCarros\Modelo3\modelo_03.jpg" />
+    <Content Include="FotosCarros\Modelo3\modelo_3.gif" />
     <Content Include="FotosCarros\ModeloS\Gif1.gif" />
     <Content Include="FotosCarros\ModeloS\gif2.gif" />
     <Content Include="FotosCarros\ModeloS\model3p.jpg" />
@@ -335,6 +354,13 @@
     <Content Include="FotosCarros\ModeloS\modelsW.jpg" />
     <Content Include="FotosCarros\models.jpg" />
     <Content Include="FotosCarros\modelx.jpg" />
+    <Content Include="FotosCarros\ModelX\ModelX.jpg" />
+    <Content Include="FotosCarros\ModelX\ModelXA.gif" />
+    <Content Include="FotosCarros\ModelX\ModelXAU.gif" />
+    <Content Include="FotosCarros\ModelX\ModelXC.jpg" />
+    <Content Include="FotosCarros\ModelX\ModelXCR.JPG" />
+    <Content Include="FotosCarros\ModelX\ModelXP.jpg" />
+    <Content Include="FotosCarros\ModelX\Model_x.jpg" />
     <Content Include="FotosCarros\modely.jpg" />
     <Content Include="FotosCarros\TeslaLogo.png" />
     <Content Include="Global.asax" />
@@ -602,9 +628,11 @@
     <Content Include="Views\Modelos\ModelS.cshtml" />
     <Content Include="Views\Modelos\Model3.cshtml" />
     <Content Include="Views\Modelos\ModelX.cshtml" />
-    <Content Include="Views\Modelos\ModelY.cshtml" />
     <Content Include="Views\Modelos\Cybertruck.cshtml" />
     <Content Include="Views\Ordenar\Index.cshtml" />
+    <Content Include="Views\Ordenar\Index3.cshtml" />
+    <Content Include="Views\Ordenar\IndexX.cshtml" />
+    <Content Include="Views\Ordenar\IndexC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

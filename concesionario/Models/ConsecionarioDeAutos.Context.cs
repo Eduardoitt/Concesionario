@@ -32,11 +32,15 @@ namespace concesionario.Models
         public virtual DbSet<AutoExistencia> AutoExistencia { get; set; }
         public virtual DbSet<Autos> Autos { get; set; }
         public virtual DbSet<Aval> Aval { get; set; }
+        public virtual DbSet<BitacoraDePago> BitacoraDePago { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Consecionario> Consecionario { get; set; }
+        public virtual DbSet<DatosFinanciamiento> DatosFinanciamiento { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<EmpleadoSucursal> EmpleadoSucursal { get; set; }
+        public virtual DbSet<FechaExpiracion> FechaExpiracion { get; set; }
+        public virtual DbSet<MesExpiracion> MesExpiracion { get; set; }
         public virtual DbSet<Modelo> Modelo { get; set; }
         public virtual DbSet<Partes> Partes { get; set; }
         public virtual DbSet<PartesInventario> PartesInventario { get; set; }
@@ -45,14 +49,12 @@ namespace concesionario.Models
         public virtual DbSet<Performance> Performance { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
+        public virtual DbSet<TiempoDePago> TiempoDePago { get; set; }
         public virtual DbSet<TipoEmpleado> TipoEmpleado { get; set; }
         public virtual DbSet<VentaAuto> VentaAuto { get; set; }
         public virtual DbSet<VentaParte> VentaParte { get; set; }
-        public virtual DbSet<BitacoraDePago> BitacoraDePago { get; set; }
-        public virtual DbSet<DatosFinanciamiento> DatosFinanciamiento { get; set; }
-        public virtual DbSet<FechaExpiracion> FechaExpiracion { get; set; }
-        public virtual DbSet<MesExpiracion> MesExpiracion { get; set; }
-        public virtual DbSet<TiempoDePago> TiempoDePago { get; set; }
+        public virtual DbSet<DB_Errors> DB_Errors { get; set; }
+        public virtual DbSet<ZonaHoraria> ZonaHoraria { get; set; }
     
         public virtual int AutosAlta(string marca, Nullable<int> idColor, Nullable<int> idModelo, Nullable<int> idAnio, Nullable<decimal> precio)
         {
@@ -96,7 +98,7 @@ namespace concesionario.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Caracteristicas", idAutoParameter, idPerformaceParameter, idColorParameter);
         }
     
-        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo, string nombreEnTC, string noTarjetaC, Nullable<int> idMesExpiracion, Nullable<int> idFechaExpiracion, string cVV, Nullable<int> cPFacturacion, Nullable<int> idTiempoDePago, Nullable<int> idSucursal)
+        public virtual int SP_OrdeanarCarro(Nullable<int> idAuto, Nullable<int> idColor, Nullable<int> idPerformance, string nombre, string apP, string apM, Nullable<int> edad, Nullable<System.DateTime> fechaDeNacimiento, Nullable<int> sexo, string rFC, string direccion, Nullable<int> cP, string telefono, string telefonoCasa, string correo, string nombreEnTC, string noTarjetaC, Nullable<int> idMesExpiracion, Nullable<int> idFechaExpiracion, string cVV, Nullable<int> cPFacturacion, Nullable<int> idTiempoDePago, Nullable<int> idSucursal, string nombreAval, string apPAval, string apMAval, string telefonoAval, ObjectParameter bandera)
         {
             var idAutoParameter = idAuto.HasValue ?
                 new ObjectParameter("IdAuto", idAuto) :
@@ -190,7 +192,23 @@ namespace concesionario.Models
                 new ObjectParameter("IdSucursal", idSucursal) :
                 new ObjectParameter("IdSucursal", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter, nombreEnTCParameter, noTarjetaCParameter, idMesExpiracionParameter, idFechaExpiracionParameter, cVVParameter, cPFacturacionParameter, idTiempoDePagoParameter, idSucursalParameter);
+            var nombreAvalParameter = nombreAval != null ?
+                new ObjectParameter("NombreAval", nombreAval) :
+                new ObjectParameter("NombreAval", typeof(string));
+    
+            var apPAvalParameter = apPAval != null ?
+                new ObjectParameter("ApPAval", apPAval) :
+                new ObjectParameter("ApPAval", typeof(string));
+    
+            var apMAvalParameter = apMAval != null ?
+                new ObjectParameter("ApMAval", apMAval) :
+                new ObjectParameter("ApMAval", typeof(string));
+    
+            var telefonoAvalParameter = telefonoAval != null ?
+                new ObjectParameter("TelefonoAval", telefonoAval) :
+                new ObjectParameter("TelefonoAval", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_OrdeanarCarro", idAutoParameter, idColorParameter, idPerformanceParameter, nombreParameter, apPParameter, apMParameter, edadParameter, fechaDeNacimientoParameter, sexoParameter, rFCParameter, direccionParameter, cPParameter, telefonoParameter, telefonoCasaParameter, correoParameter, nombreEnTCParameter, noTarjetaCParameter, idMesExpiracionParameter, idFechaExpiracionParameter, cVVParameter, cPFacturacionParameter, idTiempoDePagoParameter, idSucursalParameter, nombreAvalParameter, apPAvalParameter, apMAvalParameter, telefonoAvalParameter, bandera);
         }
     }
 }

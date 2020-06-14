@@ -105,9 +105,23 @@
     <Property Name="CVV" Type="varchar" MaxLength="3" />
     <Property Name="CPFacturacion" Type="int" />
     <Property Name="FechaPago" Type="date" />
-    <Property Name="PrimerPago" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="PrimerPago" Type="decimal" Precision="14" Scale="2" />
     <Property Name="IdCliente" Type="int" />
     <Property Name="IdTiempoDePago" Type="int" />
+  </EntityType>
+  <EntityType Name="DB_Errors">
+    <Key>
+      <PropertyRef Name="ErrorID" />
+    </Key>
+    <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" />
+    <Property Name="ErrorNumber" Type="int" />
+    <Property Name="ErrorState" Type="int" />
+    <Property Name="ErrorSeverity" Type="int" />
+    <Property Name="ErrorLine" Type="int" />
+    <Property Name="ErrorProcedure" Type="varchar(max)" />
+    <Property Name="ErrorMessage" Type="varchar(max)" />
+    <Property Name="ErrorDateTime" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="Empleado">
     <Key>
@@ -243,6 +257,14 @@
     <Property Name="IdCliente" Type="int" Nullable="false" />
     <Property Name="IdSucursal" Type="int" Nullable="false" />
     <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="ZonaHoraria">
+    <Key>
+      <PropertyRef Name="IdZonaHoraria" />
+    </Key>
+    <Property Name="IdZonaHoraria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Zona" Type="varchar" MaxLength="100" />
+    <Property Name="Estado_" Type="bit" />
   </EntityType>
   <Association Name="FK__Auto_Adic__IdAut__1332DBDC">
     <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
@@ -664,6 +686,11 @@
     <Parameter Name="CPFacturacion" Type="int" Mode="In" />
     <Parameter Name="IdTiempoDePago" Type="int" Mode="In" />
     <Parameter Name="IdSucursal" Type="int" Mode="In" />
+    <Parameter Name="NombreAval" Type="varchar" Mode="In" />
+    <Parameter Name="ApPAval" Type="varchar" Mode="In" />
+    <Parameter Name="ApMAval" Type="varchar" Mode="In" />
+    <Parameter Name="TelefonoAval" Type="varchar" Mode="In" />
+    <Parameter Name="Bandera" Type="int" Mode="InOut" />
   </Function>
   <EntityContainer Name="ConsecionarioDeAutosModelStoreContainer">
     <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
@@ -676,6 +703,7 @@
     <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Consecionario" EntityType="Self.Consecionario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DatosFinanciamiento" EntityType="Self.DatosFinanciamiento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DB_Errors" EntityType="Self.DB_Errors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmpleadoSucursal" EntityType="Self.EmpleadoSucursal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FechaExpiracion" EntityType="Self.FechaExpiracion" Schema="dbo" store:Type="Tables" />
@@ -692,6 +720,7 @@
     <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VentaParte" EntityType="Self.VentaParte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ZonaHoraria" EntityType="Self.ZonaHoraria" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Auto_Adic__IdAut__1332DBDC" Association="Self.FK__Auto_Adic__IdAut__1332DBDC">
       <End Role="Autos" EntitySet="Autos" />
       <End Role="Auto_Adiccionales" EntitySet="Auto_Adiccionales" />

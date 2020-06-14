@@ -110,9 +110,23 @@
           <Property Name="CVV" Type="varchar" MaxLength="3" />
           <Property Name="CPFacturacion" Type="int" />
           <Property Name="FechaPago" Type="date" />
-          <Property Name="PrimerPago" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PrimerPago" Type="decimal" Precision="14" Scale="2" />
           <Property Name="IdCliente" Type="int" />
           <Property Name="IdTiempoDePago" Type="int" />
+        </EntityType>
+        <EntityType Name="DB_Errors">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="ErrorNumber" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorLine" Type="int" />
+          <Property Name="ErrorProcedure" Type="varchar(max)" />
+          <Property Name="ErrorMessage" Type="varchar(max)" />
+          <Property Name="ErrorDateTime" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -248,6 +262,14 @@
           <Property Name="IdCliente" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="ZonaHoraria">
+          <Key>
+            <PropertyRef Name="IdZonaHoraria" />
+          </Key>
+          <Property Name="IdZonaHoraria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zona" Type="varchar" MaxLength="100" />
+          <Property Name="Estado_" Type="bit" />
         </EntityType>
         <Association Name="FK__Auto_Adic__IdAut__1332DBDC">
           <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
@@ -669,6 +691,11 @@
           <Parameter Name="CPFacturacion" Type="int" Mode="In" />
           <Parameter Name="IdTiempoDePago" Type="int" Mode="In" />
           <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="NombreAval" Type="varchar" Mode="In" />
+          <Parameter Name="ApPAval" Type="varchar" Mode="In" />
+          <Parameter Name="ApMAval" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoAval" Type="varchar" Mode="In" />
+          <Parameter Name="Bandera" Type="int" Mode="InOut" />
         </Function>
         <EntityContainer Name="ConsecionarioDeAutosModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
@@ -681,6 +708,7 @@
           <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Consecionario" EntityType="Self.Consecionario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DatosFinanciamiento" EntityType="Self.DatosFinanciamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_Errors" EntityType="Self.DB_Errors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoSucursal" EntityType="Self.EmpleadoSucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FechaExpiracion" EntityType="Self.FechaExpiracion" Schema="dbo" store:Type="Tables" />
@@ -697,6 +725,7 @@
           <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VentaParte" EntityType="Self.VentaParte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZonaHoraria" EntityType="Self.ZonaHoraria" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Auto_Adic__IdAut__1332DBDC" Association="Self.FK__Auto_Adic__IdAut__1332DBDC">
             <End Role="Autos" EntitySet="Autos" />
             <End Role="Auto_Adiccionales" EntitySet="Auto_Adiccionales" />
@@ -893,6 +922,18 @@
           <Property Name="Telefono" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK__Cliente__IdAval__5FB337D6" FromRole="Aval" ToRole="Cliente" />
         </EntityType>
+        <EntityType Name="BitacoraDePago">
+          <Key>
+            <PropertyRef Name="id_Bitacora" />
+          </Key>
+          <Property Name="id_Bitacora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaDePago" Type="DateTime" Precision="0" />
+          <Property Name="Abono" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PagoMinimo" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="IdVentaAuto" Type="Int32" />
+          <Property Name="Restante" Type="Decimal" Precision="14" Scale="2" />
+          <NavigationProperty Name="VentaAuto" Relationship="Self.FK__BitacoraD__IdVen__540C7B00" FromRole="BitacoraDePago" ToRole="VentaAuto" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="IdCliente" />
@@ -913,9 +954,9 @@
           <Property Name="IdAval" Type="Int32" />
           <NavigationProperty Name="Aval" Relationship="Self.FK__Cliente__IdAval__5FB337D6" FromRole="Cliente" ToRole="Aval" />
           <NavigationProperty Name="Sexo1" Relationship="Self.FK__Cliente__Sexo__3C34F16F" FromRole="Cliente" ToRole="Sexo" />
+          <NavigationProperty Name="DatosFinanciamiento" Relationship="Self.FK__DatosFina__IdCli__47A6A41B" FromRole="Cliente" ToRole="DatosFinanciamiento" />
           <NavigationProperty Name="VentaAuto" Relationship="Self.FK__VentaAuto__IdCli__1AD3FDA4" FromRole="Cliente" ToRole="VentaAuto" />
           <NavigationProperty Name="VentaParte" Relationship="Self.FK__VentaPart__IdCli__76969D2E" FromRole="Cliente" ToRole="VentaParte" />
-          <NavigationProperty Name="DatosFinanciamiento" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdCli__47A6A41B" FromRole="Cliente" ToRole="DatosFinanciamiento" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -934,6 +975,26 @@
           <Property Name="IdConsecionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Sucursal" Relationship="Self.FK__Sucursal__IdCons__398D8EEE" FromRole="Consecionario" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="DatosFinanciamiento">
+          <Key>
+            <PropertyRef Name="IdDatosFinanciamiento" />
+          </Key>
+          <Property Name="IdDatosFinanciamiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEnTC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NoTarjetaC" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="IdMesExpiracion" Type="Int32" />
+          <Property Name="IdFechaExpiracion" Type="Int32" />
+          <Property Name="CVV" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CPFacturacion" Type="Int32" />
+          <Property Name="FechaPago" Type="DateTime" Precision="0" />
+          <Property Name="PrimerPago" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdTiempoDePago" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__DatosFina__IdCli__47A6A41B" FromRole="DatosFinanciamiento" ToRole="Cliente" />
+          <NavigationProperty Name="FechaExpiracion" Relationship="Self.FK__DatosFina__IdFec__46B27FE2" FromRole="DatosFinanciamiento" ToRole="FechaExpiracion" />
+          <NavigationProperty Name="MesExpiracion" Relationship="Self.FK__DatosFina__IdMes__45BE5BA9" FromRole="DatosFinanciamiento" ToRole="MesExpiracion" />
+          <NavigationProperty Name="TiempoDePago" Relationship="Self.FK__DatosFina__IdTie__51300E55" FromRole="DatosFinanciamiento" ToRole="TiempoDePago" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -961,6 +1022,22 @@
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Empleado" Relationship="Self.FK__EmpleadoS__IdEmp__68487DD7" FromRole="EmpleadoSucursal" ToRole="Empleado" />
           <NavigationProperty Name="Sucursal" Relationship="Self.FK__EmpleadoS__IdSuc__6754599E" FromRole="EmpleadoSucursal" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="FechaExpiracion">
+          <Key>
+            <PropertyRef Name="IdFechaExpiracion" />
+          </Key>
+          <Property Name="IdFechaExpiracion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaExpiracion1" Type="Int32" />
+          <NavigationProperty Name="DatosFinanciamiento" Relationship="Self.FK__DatosFina__IdFec__46B27FE2" FromRole="FechaExpiracion" ToRole="DatosFinanciamiento" />
+        </EntityType>
+        <EntityType Name="MesExpiracion">
+          <Key>
+            <PropertyRef Name="IdMesExpiracion" />
+          </Key>
+          <Property Name="IdMesExpiracion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MesExpiracion1" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DatosFinanciamiento" Relationship="Self.FK__DatosFina__IdMes__45BE5BA9" FromRole="MesExpiracion" ToRole="DatosFinanciamiento" />
         </EntityType>
         <EntityType Name="Modelo">
           <Key>
@@ -1043,6 +1120,14 @@
           <NavigationProperty Name="VentaAuto" Relationship="Self.FK__VentaAuto__IdSuc__1BC821DD" FromRole="Sucursal" ToRole="VentaAuto" />
           <NavigationProperty Name="VentaParte" Relationship="Self.FK__VentaPart__IdSuc__778AC167" FromRole="Sucursal" ToRole="VentaParte" />
         </EntityType>
+        <EntityType Name="TiempoDePago">
+          <Key>
+            <PropertyRef Name="IdTiempoDePago" />
+          </Key>
+          <Property Name="IdTiempoDePago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TiempoDePago1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DatosFinanciamiento" Relationship="Self.FK__DatosFina__IdTie__51300E55" FromRole="TiempoDePago" ToRole="DatosFinanciamiento" />
+        </EntityType>
         <EntityType Name="TipoEmpleado">
           <Key>
             <PropertyRef Name="IdTipoEmpleado" />
@@ -1064,10 +1149,10 @@
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Auto_Adiccionales" Relationship="Self.FK__VentaAuto__IdAut__19DFD96B" FromRole="VentaAuto" ToRole="Auto_Adiccionales" />
           <NavigationProperty Name="Autos" Relationship="Self.FK__VentaAuto__IdAut__18EBB532" FromRole="VentaAuto" ToRole="Autos" />
+          <NavigationProperty Name="BitacoraDePago" Relationship="Self.FK__BitacoraD__IdVen__540C7B00" FromRole="VentaAuto" ToRole="BitacoraDePago" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK__VentaAuto__IdCli__1AD3FDA4" FromRole="VentaAuto" ToRole="Cliente" />
           <NavigationProperty Name="Empleado" Relationship="Self.FK__VentaAuto__IdEmp__17F790F9" FromRole="VentaAuto" ToRole="Empleado" />
           <NavigationProperty Name="Sucursal" Relationship="Self.FK__VentaAuto__IdSuc__1BC821DD" FromRole="VentaAuto" ToRole="Sucursal" />
-          <NavigationProperty Name="BitacoraDePago" Relationship="ConsecionarioDeAutosModel.FK__BitacoraD__IdVen__540C7B00" FromRole="VentaAuto" ToRole="BitacoraDePago" />
         </EntityType>
         <EntityType Name="VentaParte">
           <Key>
@@ -1226,6 +1311,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__BitacoraD__IdVen__540C7B00">
+          <End Role="VentaAuto" Type="Self.VentaAuto" Multiplicity="0..1" />
+          <End Role="BitacoraDePago" Type="Self.BitacoraDePago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaAuto">
+              <PropertyRef Name="IdVentaAuto" />
+            </Principal>
+            <Dependent Role="BitacoraDePago">
+              <PropertyRef Name="IdVentaAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Cliente__Sexo__3C34F16F">
           <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
@@ -1235,6 +1332,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="Sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosFina__IdCli__47A6A41B">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="DatosFinanciamiento" Type="Self.DatosFinanciamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="DatosFinanciamiento">
+              <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1271,6 +1380,42 @@
             </Principal>
             <Dependent Role="Sucursal">
               <PropertyRef Name="IdConsecionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosFina__IdFec__46B27FE2">
+          <End Role="FechaExpiracion" Type="Self.FechaExpiracion" Multiplicity="0..1" />
+          <End Role="DatosFinanciamiento" Type="Self.DatosFinanciamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FechaExpiracion">
+              <PropertyRef Name="IdFechaExpiracion" />
+            </Principal>
+            <Dependent Role="DatosFinanciamiento">
+              <PropertyRef Name="IdFechaExpiracion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosFina__IdMes__45BE5BA9">
+          <End Role="MesExpiracion" Type="Self.MesExpiracion" Multiplicity="0..1" />
+          <End Role="DatosFinanciamiento" Type="Self.DatosFinanciamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesExpiracion">
+              <PropertyRef Name="IdMesExpiracion" />
+            </Principal>
+            <Dependent Role="DatosFinanciamiento">
+              <PropertyRef Name="IdMesExpiracion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosFina__IdTie__51300E55">
+          <End Role="TiempoDePago" Type="Self.TiempoDePago" Multiplicity="0..1" />
+          <End Role="DatosFinanciamiento" Type="Self.DatosFinanciamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiempoDePago">
+              <PropertyRef Name="IdTiempoDePago" />
+            </Principal>
+            <Dependent Role="DatosFinanciamiento">
+              <PropertyRef Name="IdTiempoDePago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1412,11 +1557,15 @@
           <EntitySet Name="AutoExistencia" EntityType="Self.AutoExistencia" />
           <EntitySet Name="Autos" EntityType="Self.Autos" />
           <EntitySet Name="Aval" EntityType="Self.Aval" />
+          <EntitySet Name="BitacoraDePago" EntityType="Self.BitacoraDePago" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="Color" EntityType="Self.Color" />
           <EntitySet Name="Consecionario" EntityType="Self.Consecionario" />
+          <EntitySet Name="DatosFinanciamiento" EntityType="Self.DatosFinanciamiento" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" />
           <EntitySet Name="EmpleadoSucursal" EntityType="Self.EmpleadoSucursal" />
+          <EntitySet Name="FechaExpiracion" EntityType="Self.FechaExpiracion" />
+          <EntitySet Name="MesExpiracion" EntityType="Self.MesExpiracion" />
           <EntitySet Name="Modelo" EntityType="Self.Modelo" />
           <EntitySet Name="Partes" EntityType="Self.Partes" />
           <EntitySet Name="PartesInventario" EntityType="Self.PartesInventario" />
@@ -1425,6 +1574,7 @@
           <EntitySet Name="Performance" EntityType="Self.Performance" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" />
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
+          <EntitySet Name="TiempoDePago" EntityType="Self.TiempoDePago" />
           <EntitySet Name="TipoEmpleado" EntityType="Self.TipoEmpleado" />
           <EntitySet Name="VentaAuto" EntityType="Self.VentaAuto" />
           <EntitySet Name="VentaParte" EntityType="Self.VentaParte" />
@@ -1476,9 +1626,17 @@
             <End Role="Aval" EntitySet="Aval" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
+          <AssociationSet Name="FK__BitacoraD__IdVen__540C7B00" Association="Self.FK__BitacoraD__IdVen__540C7B00">
+            <End Role="VentaAuto" EntitySet="VentaAuto" />
+            <End Role="BitacoraDePago" EntitySet="BitacoraDePago" />
+          </AssociationSet>
           <AssociationSet Name="FK__Cliente__Sexo__3C34F16F" Association="Self.FK__Cliente__Sexo__3C34F16F">
             <End Role="Sexo" EntitySet="Sexo" />
             <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosFina__IdCli__47A6A41B" Association="Self.FK__DatosFina__IdCli__47A6A41B">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
           </AssociationSet>
           <AssociationSet Name="FK__VentaAuto__IdCli__1AD3FDA4" Association="Self.FK__VentaAuto__IdCli__1AD3FDA4">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -1491,6 +1649,18 @@
           <AssociationSet Name="FK__Sucursal__IdCons__398D8EEE" Association="Self.FK__Sucursal__IdCons__398D8EEE">
             <End Role="Consecionario" EntitySet="Consecionario" />
             <End Role="Sucursal" EntitySet="Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosFina__IdFec__46B27FE2" Association="Self.FK__DatosFina__IdFec__46B27FE2">
+            <End Role="FechaExpiracion" EntitySet="FechaExpiracion" />
+            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosFina__IdMes__45BE5BA9" Association="Self.FK__DatosFina__IdMes__45BE5BA9">
+            <End Role="MesExpiracion" EntitySet="MesExpiracion" />
+            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosFina__IdTie__51300E55" Association="Self.FK__DatosFina__IdTie__51300E55">
+            <End Role="TiempoDePago" EntitySet="TiempoDePago" />
+            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
           </AssociationSet>
           <AssociationSet Name="FK__Empleado__IdTipo__6477ECF3" Association="Self.FK__Empleado__IdTipo__6477ECF3">
             <End Role="TipoEmpleado" EntitySet="TipoEmpleado" />
@@ -1572,149 +1742,37 @@
             <Parameter Name="CPFacturacion" Mode="In" Type="Int32" />
             <Parameter Name="IdTiempoDePago" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="NombreAval" Mode="In" Type="String" />
+            <Parameter Name="ApPAval" Mode="In" Type="String" />
+            <Parameter Name="ApMAval" Mode="In" Type="String" />
+            <Parameter Name="TelefonoAval" Mode="In" Type="String" />
+            <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="BitacoraDePago" EntityType="ConsecionarioDeAutosModel.BitacoraDePago" />
-          <EntitySet Name="DatosFinanciamiento" EntityType="ConsecionarioDeAutosModel.DatosFinanciamiento" />
-          <EntitySet Name="FechaExpiracion" EntityType="ConsecionarioDeAutosModel.FechaExpiracion" />
-          <EntitySet Name="MesExpiracion" EntityType="ConsecionarioDeAutosModel.MesExpiracion" />
-          <EntitySet Name="TiempoDePago" EntityType="ConsecionarioDeAutosModel.TiempoDePago" />
-          <AssociationSet Name="FK__BitacoraD__IdVen__540C7B00" Association="ConsecionarioDeAutosModel.FK__BitacoraD__IdVen__540C7B00">
-            <End Role="VentaAuto" EntitySet="VentaAuto" />
-            <End Role="BitacoraDePago" EntitySet="BitacoraDePago" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DatosFina__IdCli__47A6A41B" Association="ConsecionarioDeAutosModel.FK__DatosFina__IdCli__47A6A41B">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DatosFina__IdFec__46B27FE2" Association="ConsecionarioDeAutosModel.FK__DatosFina__IdFec__46B27FE2">
-            <End Role="FechaExpiracion" EntitySet="FechaExpiracion" />
-            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DatosFina__IdMes__45BE5BA9" Association="ConsecionarioDeAutosModel.FK__DatosFina__IdMes__45BE5BA9">
-            <End Role="MesExpiracion" EntitySet="MesExpiracion" />
-            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DatosFina__IdTie__51300E55" Association="ConsecionarioDeAutosModel.FK__DatosFina__IdTie__51300E55">
-            <End Role="TiempoDePago" EntitySet="TiempoDePago" />
-            <End Role="DatosFinanciamiento" EntitySet="DatosFinanciamiento" />
-          </AssociationSet>
+          <EntitySet Name="DB_Errors" EntityType="ConsecionarioDeAutosModel.DB_Errors" />
+          <EntitySet Name="ZonaHoraria" EntityType="ConsecionarioDeAutosModel.ZonaHoraria" />
         </EntityContainer>
-        <EntityType Name="BitacoraDePago">
+        <EntityType Name="DB_Errors">
           <Key>
-            <PropertyRef Name="id_Bitacora" />
+            <PropertyRef Name="ErrorID" />
           </Key>
-          <Property Name="id_Bitacora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FechaDePago" Type="DateTime" Precision="0" />
-          <Property Name="Abono" Type="Decimal" Precision="14" Scale="2" />
-          <Property Name="PagoMinimo" Type="Decimal" Precision="14" Scale="2" />
-          <Property Name="IdVentaAuto" Type="Int32" />
-          <Property Name="Restante" Type="Decimal" Precision="14" Scale="2" />
-          <NavigationProperty Name="VentaAuto" Relationship="ConsecionarioDeAutosModel.FK__BitacoraD__IdVen__540C7B00" FromRole="BitacoraDePago" ToRole="VentaAuto" />
+          <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorNumber" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="ErrorSeverity" Type="Int32" />
+          <Property Name="ErrorLine" Type="Int32" />
+          <Property Name="ErrorProcedure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorDateTime" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="DatosFinanciamiento">
+        <EntityType Name="ZonaHoraria">
           <Key>
-            <PropertyRef Name="IdDatosFinanciamiento" />
+            <PropertyRef Name="IdZonaHoraria" />
           </Key>
-          <Property Name="IdDatosFinanciamiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreEnTC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NoTarjetaC" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
-          <Property Name="IdMesExpiracion" Type="Int32" />
-          <Property Name="IdFechaExpiracion" Type="Int32" />
-          <Property Name="CVV" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="CPFacturacion" Type="Int32" />
-          <Property Name="FechaPago" Type="DateTime" Precision="0" />
-          <Property Name="PrimerPago" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdCliente" Type="Int32" />
-          <Property Name="IdTiempoDePago" Type="Int32" />
-          <NavigationProperty Name="Cliente" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdCli__47A6A41B" FromRole="DatosFinanciamiento" ToRole="Cliente" />
-          <NavigationProperty Name="FechaExpiracion" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdFec__46B27FE2" FromRole="DatosFinanciamiento" ToRole="FechaExpiracion" />
-          <NavigationProperty Name="MesExpiracion" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdMes__45BE5BA9" FromRole="DatosFinanciamiento" ToRole="MesExpiracion" />
-          <NavigationProperty Name="TiempoDePago" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdTie__51300E55" FromRole="DatosFinanciamiento" ToRole="TiempoDePago" />
+          <Property Name="IdZonaHoraria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_" Type="Boolean" />
         </EntityType>
-        <EntityType Name="FechaExpiracion">
-          <Key>
-            <PropertyRef Name="IdFechaExpiracion" />
-          </Key>
-          <Property Name="IdFechaExpiracion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FechaExpiracion1" Type="Int32" />
-          <NavigationProperty Name="DatosFinanciamiento" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdFec__46B27FE2" FromRole="FechaExpiracion" ToRole="DatosFinanciamiento" />
-        </EntityType>
-        <EntityType Name="MesExpiracion">
-          <Key>
-            <PropertyRef Name="IdMesExpiracion" />
-          </Key>
-          <Property Name="IdMesExpiracion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MesExpiracion1" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DatosFinanciamiento" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdMes__45BE5BA9" FromRole="MesExpiracion" ToRole="DatosFinanciamiento" />
-        </EntityType>
-        <EntityType Name="TiempoDePago">
-          <Key>
-            <PropertyRef Name="IdTiempoDePago" />
-          </Key>
-          <Property Name="IdTiempoDePago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TiempoDePago1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DatosFinanciamiento" Relationship="ConsecionarioDeAutosModel.FK__DatosFina__IdTie__51300E55" FromRole="TiempoDePago" ToRole="DatosFinanciamiento" />
-        </EntityType>
-        <Association Name="FK__BitacoraD__IdVen__540C7B00">
-          <End Type="ConsecionarioDeAutosModel.VentaAuto" Role="VentaAuto" Multiplicity="0..1" />
-          <End Type="ConsecionarioDeAutosModel.BitacoraDePago" Role="BitacoraDePago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaAuto">
-              <PropertyRef Name="IdVentaAuto" />
-            </Principal>
-            <Dependent Role="BitacoraDePago">
-              <PropertyRef Name="IdVentaAuto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DatosFina__IdCli__47A6A41B">
-          <End Type="ConsecionarioDeAutosModel.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="ConsecionarioDeAutosModel.DatosFinanciamiento" Role="DatosFinanciamiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="DatosFinanciamiento">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DatosFina__IdFec__46B27FE2">
-          <End Type="ConsecionarioDeAutosModel.FechaExpiracion" Role="FechaExpiracion" Multiplicity="0..1" />
-          <End Type="ConsecionarioDeAutosModel.DatosFinanciamiento" Role="DatosFinanciamiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FechaExpiracion">
-              <PropertyRef Name="IdFechaExpiracion" />
-            </Principal>
-            <Dependent Role="DatosFinanciamiento">
-              <PropertyRef Name="IdFechaExpiracion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DatosFina__IdMes__45BE5BA9">
-          <End Type="ConsecionarioDeAutosModel.MesExpiracion" Role="MesExpiracion" Multiplicity="0..1" />
-          <End Type="ConsecionarioDeAutosModel.DatosFinanciamiento" Role="DatosFinanciamiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MesExpiracion">
-              <PropertyRef Name="IdMesExpiracion" />
-            </Principal>
-            <Dependent Role="DatosFinanciamiento">
-              <PropertyRef Name="IdMesExpiracion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DatosFina__IdTie__51300E55">
-          <End Type="ConsecionarioDeAutosModel.TiempoDePago" Role="TiempoDePago" Multiplicity="0..1" />
-          <End Type="ConsecionarioDeAutosModel.DatosFinanciamiento" Role="DatosFinanciamiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiempoDePago">
-              <PropertyRef Name="IdTiempoDePago" />
-            </Principal>
-            <Dependent Role="DatosFinanciamiento">
-              <PropertyRef Name="IdTiempoDePago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1774,6 +1832,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BitacoraDePago">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.BitacoraDePago">
+              <MappingFragment StoreEntitySet="BitacoraDePago">
+                <ScalarProperty Name="id_Bitacora" ColumnName="id_Bitacora" />
+                <ScalarProperty Name="FechaDePago" ColumnName="FechaDePago" />
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="PagoMinimo" ColumnName="PagoMinimo" />
+                <ScalarProperty Name="IdVentaAuto" ColumnName="IdVentaAuto" />
+                <ScalarProperty Name="Restante" ColumnName="Restante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
@@ -1811,6 +1881,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DatosFinanciamiento">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.DatosFinanciamiento">
+              <MappingFragment StoreEntitySet="DatosFinanciamiento">
+                <ScalarProperty Name="IdDatosFinanciamiento" ColumnName="IdDatosFinanciamiento" />
+                <ScalarProperty Name="NombreEnTC" ColumnName="NombreEnTC" />
+                <ScalarProperty Name="NoTarjetaC" ColumnName="NoTarjetaC" />
+                <ScalarProperty Name="IdMesExpiracion" ColumnName="IdMesExpiracion" />
+                <ScalarProperty Name="IdFechaExpiracion" ColumnName="IdFechaExpiracion" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="CPFacturacion" ColumnName="CPFacturacion" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="PrimerPago" ColumnName="PrimerPago" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdTiempoDePago" ColumnName="IdTiempoDePago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Empleado">
             <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
@@ -1831,6 +1918,22 @@
                 <ScalarProperty Name="IdEmpleadoSucursal" ColumnName="IdEmpleadoSucursal" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FechaExpiracion">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.FechaExpiracion">
+              <MappingFragment StoreEntitySet="FechaExpiracion">
+                <ScalarProperty Name="IdFechaExpiracion" ColumnName="IdFechaExpiracion" />
+                <ScalarProperty Name="FechaExpiracion1" ColumnName="FechaExpiracion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MesExpiracion">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.MesExpiracion">
+              <MappingFragment StoreEntitySet="MesExpiracion">
+                <ScalarProperty Name="IdMesExpiracion" ColumnName="IdMesExpiracion" />
+                <ScalarProperty Name="MesExpiracion1" ColumnName="MesExpiracion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1906,6 +2009,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TiempoDePago">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.TiempoDePago">
+              <MappingFragment StoreEntitySet="TiempoDePago">
+                <ScalarProperty Name="IdTiempoDePago" ColumnName="IdTiempoDePago" />
+                <ScalarProperty Name="TiempoDePago1" ColumnName="TiempoDePago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TipoEmpleado">
             <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.TipoEmpleado">
               <MappingFragment StoreEntitySet="TipoEmpleado">
@@ -1941,56 +2052,27 @@
           <FunctionImportMapping FunctionImportName="AutosAlta" FunctionName="ConsecionarioDeAutosModel.Store.AutosAlta" />
           <FunctionImportMapping FunctionImportName="Caracteristicas" FunctionName="ConsecionarioDeAutosModel.Store.Caracteristicas" />
           <FunctionImportMapping FunctionImportName="SP_OrdeanarCarro" FunctionName="ConsecionarioDeAutosModel.Store.SP_OrdeanarCarro" />
-          <EntitySetMapping Name="BitacoraDePago">
-            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.BitacoraDePago">
-              <MappingFragment StoreEntitySet="BitacoraDePago">
-                <ScalarProperty Name="Restante" ColumnName="Restante" />
-                <ScalarProperty Name="IdVentaAuto" ColumnName="IdVentaAuto" />
-                <ScalarProperty Name="PagoMinimo" ColumnName="PagoMinimo" />
-                <ScalarProperty Name="Abono" ColumnName="Abono" />
-                <ScalarProperty Name="FechaDePago" ColumnName="FechaDePago" />
-                <ScalarProperty Name="id_Bitacora" ColumnName="id_Bitacora" />
+          <EntitySetMapping Name="DB_Errors">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.DB_Errors">
+              <MappingFragment StoreEntitySet="DB_Errors">
+                <ScalarProperty Name="ErrorDateTime" ColumnName="ErrorDateTime" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DatosFinanciamiento">
-            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.DatosFinanciamiento">
-              <MappingFragment StoreEntitySet="DatosFinanciamiento">
-                <ScalarProperty Name="IdTiempoDePago" ColumnName="IdTiempoDePago" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="PrimerPago" ColumnName="PrimerPago" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="CPFacturacion" ColumnName="CPFacturacion" />
-                <ScalarProperty Name="CVV" ColumnName="CVV" />
-                <ScalarProperty Name="IdFechaExpiracion" ColumnName="IdFechaExpiracion" />
-                <ScalarProperty Name="IdMesExpiracion" ColumnName="IdMesExpiracion" />
-                <ScalarProperty Name="NoTarjetaC" ColumnName="NoTarjetaC" />
-                <ScalarProperty Name="NombreEnTC" ColumnName="NombreEnTC" />
-                <ScalarProperty Name="IdDatosFinanciamiento" ColumnName="IdDatosFinanciamiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FechaExpiracion">
-            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.FechaExpiracion">
-              <MappingFragment StoreEntitySet="FechaExpiracion">
-                <ScalarProperty Name="FechaExpiracion1" ColumnName="FechaExpiracion" />
-                <ScalarProperty Name="IdFechaExpiracion" ColumnName="IdFechaExpiracion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MesExpiracion">
-            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.MesExpiracion">
-              <MappingFragment StoreEntitySet="MesExpiracion">
-                <ScalarProperty Name="MesExpiracion1" ColumnName="MesExpiracion" />
-                <ScalarProperty Name="IdMesExpiracion" ColumnName="IdMesExpiracion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TiempoDePago">
-            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.TiempoDePago">
-              <MappingFragment StoreEntitySet="TiempoDePago">
-                <ScalarProperty Name="TiempoDePago1" ColumnName="TiempoDePago" />
-                <ScalarProperty Name="IdTiempoDePago" ColumnName="IdTiempoDePago" />
+          <EntitySetMapping Name="ZonaHoraria">
+            <EntityTypeMapping TypeName="ConsecionarioDeAutosModel.ZonaHoraria">
+              <MappingFragment StoreEntitySet="ZonaHoraria">
+                <ScalarProperty Name="Estado_" ColumnName="Estado_" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="IdZonaHoraria" ColumnName="IdZonaHoraria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
