@@ -346,5 +346,18 @@ namespace concesionario.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Usuario_Alta", usuarioParameter, contraParameter, idEmpleadoParameter, bandera);
         }
+    
+        public virtual int SP_CompraCompletada(Nullable<int> idVentaAuto, Nullable<int> idEmpleado, ObjectParameter bandera)
+        {
+            var idVentaAutoParameter = idVentaAuto.HasValue ?
+                new ObjectParameter("IdVentaAuto", idVentaAuto) :
+                new ObjectParameter("IdVentaAuto", typeof(int));
+    
+            var idEmpleadoParameter = idEmpleado.HasValue ?
+                new ObjectParameter("IdEmpleado", idEmpleado) :
+                new ObjectParameter("IdEmpleado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CompraCompletada", idVentaAutoParameter, idEmpleadoParameter, bandera);
+        }
     }
 }

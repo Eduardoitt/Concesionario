@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using concesionario.Models;
 using Newtonsoft.Json;
 using System.Data.Entity.Core.Objects;
+using System.Security.Cryptography;
 
 namespace concesionario.Controllers
 {
@@ -85,6 +86,25 @@ namespace concesionario.Controllers
             JSONString = JsonConvert.SerializeObject(grid);
             return Json(JSONString, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Completado(int IdVentaAuto)
+        {
+            int IdUsuario = Convert.ToInt32(Session["IdUsuario"]);
+            var IdEmpleado = (from u in db.UsuarioLogin join e in db.Empleado on u.IdUsuarioLogin equals e.IdUsuarioLogin where u.IdUsuarioLogin == IdUsuario
+                              select e.IdEmpleado).FirstOrDefault();
+
+            ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
+            db.SP_CompraCompletada(IdVentaAuto,IdEmpleado, OutPut);
+            int valorR = Convert.ToInt32(OutPut.Value);
+            if (valorR == 1)
+            {
+                return Json(new { value = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { value = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        
         public ActionResult Traspaso()
         {
             return View("Traspaso");
