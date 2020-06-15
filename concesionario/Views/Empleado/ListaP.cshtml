@@ -9,7 +9,7 @@
         <div class="card ">
             <div class="card-header card-header-info card-header-text h4">
                 <div class="card-icon">
-                    <i class="fas fa-users"></i>
+                    <i class="material-icons">attach_money</i>
                 </div>
                 <h4 class="card-title">Listado de Pago</h4>
             </div>
@@ -32,7 +32,7 @@
                        col.Field("Restante").HeaderText("Restante").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
                        col.Field("IdCliente").HeaderText("IdCliente").Visible(false).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
 
-                   }).AllowPaging().Toolbar(new List<string>() { "ExcelExport", "PdfExport", "Print", "CsvExport" }).HierarchyPrintMode(Syncfusion.EJ2.Grids.HierarchyGridPrintMode.All).SelectionSettings(select => select.Type(Syncfusion.EJ2.Grids.SelectionType.Single)).PageSettings(page => page.PageSize(10)).Locale("es-mx").Render()
+                   }).AllowPaging().Toolbar(new List<string>() { "ExcelExport", "PdfExport", "Print"}).HierarchyPrintMode(Syncfusion.EJ2.Grids.HierarchyGridPrintMode.All).SelectionSettings(select => select.Type(Syncfusion.EJ2.Grids.SelectionType.Single)).PageSettings(page => page.PageSize(10)).Locale("es-mx").Render()
                     </div>
                 </div>
 
@@ -56,9 +56,7 @@
         if (args.item.id === 'Grid_excelexport') {
             this.excelExport(getExcelExportProperties());
         }
-        if (args.item.id === 'Grid_csvexport') {
-            gridObj.csvExport();
-        }
+       
     }
     function getExcelExportProperties() {
         return {
