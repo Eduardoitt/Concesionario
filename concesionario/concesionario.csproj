@@ -155,6 +155,7 @@
     <Compile Include="Models\Autos.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutosConsecionario.cs" />
     <Compile Include="Models\Auto_Adiccionales.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>

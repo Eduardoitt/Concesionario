@@ -27,7 +27,7 @@ namespace concesionario.Controllers
                                       ).FirstOrDefault();
 
             ViewBag.NombreEmpleado = nombre + " " + ApP;
-         
+
             return View("Index");
         }
 
@@ -90,11 +90,13 @@ namespace concesionario.Controllers
         public ActionResult Completado(int IdVentaAuto)
         {
             int IdUsuario = Convert.ToInt32(Session["IdUsuario"]);
-            var IdEmpleado = (from u in db.UsuarioLogin join e in db.Empleado on u.IdUsuarioLogin equals e.IdUsuarioLogin where u.IdUsuarioLogin == IdUsuario
+            var IdEmpleado = (from u in db.UsuarioLogin
+                              join e in db.Empleado on u.IdUsuarioLogin equals e.IdUsuarioLogin
+                              where u.IdUsuarioLogin == IdUsuario
                               select e.IdEmpleado).FirstOrDefault();
 
             ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
-            db.SP_CompraCompletada(IdVentaAuto,IdEmpleado, OutPut);
+            db.SP_CompraCompletada(IdVentaAuto, IdEmpleado, OutPut);
             int valorR = Convert.ToInt32(OutPut.Value);
             if (valorR == 1)
             {
@@ -105,22 +107,22 @@ namespace concesionario.Controllers
                 return Json(new { value = 0 }, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         public ActionResult Traspaso()
         {
             return View("Traspaso");
         }
-        public ActionResult Abonar(int id_Bitacora,decimal PagoMinimo)
+        public ActionResult Abonar(int id_Bitacora, decimal PagoMinimo)
         {
-            
+
             ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
-            db.SP_Abonar(id_Bitacora,PagoMinimo, OutPut);
+            db.SP_Abonar(id_Bitacora, PagoMinimo, OutPut);
             int valorR = Convert.ToInt32(OutPut.Value);
             if (valorR == 1)
             {
                 return Json(new { value = 1 }, JsonRequestBehavior.AllowGet);
             }
-            else if (valorR==2)
+            else if (valorR == 2)
             {
                 return Json(new { value = 2 }, JsonRequestBehavior.AllowGet);
             }
@@ -143,7 +145,7 @@ namespace concesionario.Controllers
             List<Bitacora> grid = (from bp in db.BitacoraDePago
                                    join va in db.VentaAuto on bp.IdVentaAuto equals va.IdVentaAuto
                                    join c in db.Cliente on va.IdCliente equals c.IdCliente
-                                   where bp.Restante!=null
+                                   where bp.Restante != null
                                    select new Bitacora
                                    {
                                        id_Bitacora = bp.id_Bitacora,
@@ -172,7 +174,7 @@ namespace concesionario.Controllers
                             select new
                             {
                                 IdAnio = A.IdAnio,
-                                Anio=A.Anio1
+                                Anio = A.Anio1
 
                             }).ToList();
             ViewBag.Sucursal = (from s in db.Sucursal
@@ -182,7 +184,7 @@ namespace concesionario.Controllers
                                     Sucursal = s.Direccion
 
                                 }).ToList();
-            
+
             return View("AltaAuto");
         }
         [HttpPost]
@@ -198,7 +200,7 @@ namespace concesionario.Controllers
                 else
                 {
                     ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
-                    db.AutosAlta(model.Marca,model.IdColor,model.Modelo,model.IdAnio,model.Precio,model.Cantidad,model.IdSucursal, OutPut);
+                    db.AutosAlta(model.Marca, model.IdColor, model.Modelo, model.IdAnio, model.Precio, model.Cantidad, model.IdSucursal, OutPut);
                     int valorR = Convert.ToInt32(OutPut.Value);
                     if (valorR == 1)
                     {
@@ -211,21 +213,41 @@ namespace concesionario.Controllers
                 }
             }
             catch
-            {         
+            {
                 return PartialView("Index", model);
             }
+        }
+
+        public ActionResult AutosConsecionario()
+        {
+            string JSONString = string.Empty;
+            List<AutosConsecionario> grid = (from a in db.Autos
+                                             join m in db.Modelo on a.IdModelo equals m.IdModelo
+                                             join an in db.Anio on a.IdAnio equals an.IdAnio
+
+                                             select new AutosConsecionario
+                                             {
+                                                 IdAuto = a.IdAutos,
+                                                 Marca = a.Marca + " "+m.Modelo1,
+                                                 IdModelo = a.IdModelo,
+                                                 IdAnio = a.IdAnio,
+                                                 Anio = an.Anio1,
+                                                 Precio = a.Precio
+                                             }).ToList();
+            JSONString = JsonConvert.SerializeObject(grid);
+            return Json(JSONString, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult TraspasoA()
         {
             ViewBag.Modelo = (from m in db.Modelo
-                            select new
-                            {
-                                IdModelo = m.IdModelo,
-                                Modelo = m.Modelo1
+                              select new
+                              {
+                                  IdModelo = m.IdModelo,
+                                  Modelo = m.Modelo1
 
-                            }).ToList();
+                              }).ToList();
             ViewBag.Sucursal = (from s in db.Sucursal
                                 select new
                                 {
@@ -233,20 +255,21 @@ namespace concesionario.Controllers
                                     Sucursal = s.Direccion
 
                                 }).ToList();
-            ViewBag.Anio = (from a in db.Anio where a.IdAnio!=1
-                                select new
-                                {
-                                    IdAnio = a.IdAnio,
-                                    Anio = a.Anio1
+            ViewBag.Anio = (from a in db.Anio
+                            where a.IdAnio != 1
+                            select new
+                            {
+                                IdAnio = a.IdAnio,
+                                Anio = a.Anio1
 
-                                }).ToList();
+                            }).ToList();
             ViewBag.SucursalD = (from s in db.Sucursal
-                                select new
-                                {
-                                    IdSucursal = s.IdSucursal,
-                                    Sucursal = s.Direccion
+                                 select new
+                                 {
+                                     IdSucursal = s.IdSucursal,
+                                     Sucursal = s.Direccion
 
-                                }).ToList();
+                                 }).ToList();
             return View("Traspaso");
         }
         [HttpPost]
@@ -261,7 +284,7 @@ namespace concesionario.Controllers
                 else
                 {
                     ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
-                    db.SP_Traspaso(model.IdModelo,model.IdAnio,model.Cantidad,model.IdSucursal,model.IdSucursalD, OutPut);
+                    db.SP_Traspaso(model.IdModelo, model.IdAnio, model.Cantidad, model.IdSucursal, model.IdSucursalD, OutPut);
                     int valorR = Convert.ToInt32(OutPut.Value);
                     if (valorR == 1)
                     {
