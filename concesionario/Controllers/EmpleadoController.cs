@@ -109,5 +109,29 @@ namespace concesionario.Controllers
         {
             return View("Traspaso");
         }
+        public ActionResult Abonar(int id_Bitacora,decimal PagoMinimo)
+        {
+            
+            ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
+            db.SP_Abonar(id_Bitacora,PagoMinimo, OutPut);
+            int valorR = Convert.ToInt32(OutPut.Value);
+            if (valorR == 1)
+            {
+                return Json(new { value = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            else if (valorR==2)
+            {
+                return Json(new { value = 2 }, JsonRequestBehavior.AllowGet);
+            }
+            else if (valorR == 3)
+            {
+                return Json(new { value = 3 }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { value = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

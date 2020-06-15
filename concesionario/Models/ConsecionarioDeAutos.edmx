@@ -719,6 +719,11 @@
           <Parameter Name="IdColor" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="SP_Abonar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Bitacora" Type="int" Mode="In" />
+          <Parameter Name="Pago" Type="decimal" Mode="In" />
+          <Parameter Name="Bandera" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -1991,6 +1996,11 @@
             <Parameter Name="IdEmpleado" Mode="In" Type="Int32" />
             <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_Abonar">
+            <Parameter Name="id_Bitacora" Mode="In" Type="Int32" />
+            <Parameter Name="Pago" Mode="In" Type="Decimal" />
+            <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2374,6 +2384,7 @@
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ConsecionarioDeAutosModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="SP_Usuario_Alta" FunctionName="ConsecionarioDeAutosModel.Store.SP_Usuario_Alta" />
           <FunctionImportMapping FunctionImportName="SP_CompraCompletada" FunctionName="ConsecionarioDeAutosModel.Store.SP_CompraCompletada" />
+          <FunctionImportMapping FunctionImportName="SP_Abonar" FunctionName="ConsecionarioDeAutosModel.Store.SP_Abonar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

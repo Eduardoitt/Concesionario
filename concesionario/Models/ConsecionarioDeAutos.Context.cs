@@ -359,5 +359,18 @@ namespace concesionario.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CompraCompletada", idVentaAutoParameter, idEmpleadoParameter, bandera);
         }
+    
+        public virtual int SP_Abonar(Nullable<int> id_Bitacora, Nullable<decimal> pago, ObjectParameter bandera)
+        {
+            var id_BitacoraParameter = id_Bitacora.HasValue ?
+                new ObjectParameter("id_Bitacora", id_Bitacora) :
+                new ObjectParameter("id_Bitacora", typeof(int));
+    
+            var pagoParameter = pago.HasValue ?
+                new ObjectParameter("Pago", pago) :
+                new ObjectParameter("Pago", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Abonar", id_BitacoraParameter, pagoParameter, bandera);
+        }
     }
 }

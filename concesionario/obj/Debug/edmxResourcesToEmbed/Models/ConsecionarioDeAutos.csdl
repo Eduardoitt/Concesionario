@@ -1024,6 +1024,11 @@
       <Parameter Name="IdEmpleado" Mode="In" Type="Int32" />
       <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_Abonar">
+      <Parameter Name="id_Bitacora" Mode="In" Type="Int32" />
+      <Parameter Name="Pago" Mode="In" Type="Decimal" />
+      <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
