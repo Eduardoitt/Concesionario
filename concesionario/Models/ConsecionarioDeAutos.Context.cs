@@ -59,7 +59,7 @@ namespace concesionario.Models
         public virtual DbSet<VentaParte> VentaParte { get; set; }
         public virtual DbSet<ZonaHoraria> ZonaHoraria { get; set; }
     
-        public virtual int AutosAlta(string marca, Nullable<int> idColor, Nullable<int> idModelo, Nullable<int> idAnio, Nullable<decimal> precio)
+        public virtual int AutosAlta(string marca, Nullable<int> idColor, string modelo, Nullable<int> idAnio, Nullable<decimal> precio, Nullable<int> cantidad, Nullable<int> idSucursal, ObjectParameter bandera)
         {
             var marcaParameter = marca != null ?
                 new ObjectParameter("Marca", marca) :
@@ -69,9 +69,9 @@ namespace concesionario.Models
                 new ObjectParameter("IdColor", idColor) :
                 new ObjectParameter("IdColor", typeof(int));
     
-            var idModeloParameter = idModelo.HasValue ?
-                new ObjectParameter("IdModelo", idModelo) :
-                new ObjectParameter("IdModelo", typeof(int));
+            var modeloParameter = modelo != null ?
+                new ObjectParameter("Modelo", modelo) :
+                new ObjectParameter("Modelo", typeof(string));
     
             var idAnioParameter = idAnio.HasValue ?
                 new ObjectParameter("IdAnio", idAnio) :
@@ -81,7 +81,15 @@ namespace concesionario.Models
                 new ObjectParameter("Precio", precio) :
                 new ObjectParameter("Precio", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AutosAlta", marcaParameter, idColorParameter, idModeloParameter, idAnioParameter, precioParameter);
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AutosAlta", marcaParameter, idColorParameter, modeloParameter, idAnioParameter, precioParameter, cantidadParameter, idSucursalParameter, bandera);
         }
     
         public virtual int Caracteristicas(Nullable<int> idAuto, Nullable<int> idPerformace, Nullable<int> idColor)

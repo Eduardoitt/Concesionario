@@ -132,6 +132,87 @@ namespace concesionario.Controllers
                 return Json(new { value = 0 }, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult Pagos()
+        {
+            return View("ListaP");
+        }
+        public ActionResult Lp()
+        {
+            string JSONString = string.Empty;
+            List<Bitacora> grid = (from bp in db.BitacoraDePago
+                                   join va in db.VentaAuto on bp.IdVentaAuto equals va.IdVentaAuto
+                                   join c in db.Cliente on va.IdCliente equals c.IdCliente
+                                   where bp.Restante!=null
+                                   select new Bitacora
+                                   {
+                                       id_Bitacora = bp.id_Bitacora,
+                                       FechaDePago = bp.FechaDePago,
+                                       Abono = bp.Abono,
+                                       PagoMinimo = bp.PagoMinimo,
+                                       IdVentaAuto = bp.IdVentaAuto,
+                                       Restante = bp.Restante,
+                                       IdCliente = c.IdCliente,
+                                       Nombre = c.Nombre + " " + c.ApP + " " + c.ApM
+                                   }).ToList();
 
+            JSONString = JsonConvert.SerializeObject(grid);
+            return Json(JSONString, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult Alta()
+        {
+            ViewBag.Color = (from c in db.Color
+                             select new
+                             {
+                                 IdColor = c.IdColor,
+                                 Color = c.Color1 + " $" + c.Precio,
+                             }).ToList();
+            ViewBag.Anio = (from A in db.Anio
+                            select new
+                            {
+                                IdAnio = A.IdAnio,
+                                Anio=A.Anio1
+
+                            }).ToList();
+            ViewBag.Sucursal = (from s in db.Sucursal
+                                select new
+                                {
+                                    IdSucursal = s.IdSucursal,
+                                    Sucursal = s.Direccion
+
+                                }).ToList();
+            
+            return View("AltaAuto");
+        }
+        [HttpPost]
+        public ActionResult Alta(AltaAuto model)
+        {
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
+                    db.AutosAlta(model.Marca,model.IdColor,model.Modelo,model.IdAnio,model.Precio,model.Cantidad,model.IdSucursal, OutPut);
+                    int valorR = Convert.ToInt32(OutPut.Value);
+                    if (valorR == 1)
+                    {
+                        return Json(new { value = 1, messen = "Carro Creado" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { value = 0, messen = "Ocurrio un error, favor de no dejar campos vacios" });
+                    }
+                }
+            }
+            catch
+            {         
+                return PartialView("Index", model);
+            }
+        }
     }
 }

@@ -145,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AltaAuto.cs" />
     <Compile Include="Models\Anio.cs">
       <DependentUpon>ConsecionarioDeAutos.tt</DependentUpon>
     </Compile>
@@ -664,6 +665,8 @@
     <Content Include="Views\Empleado\Abono.cshtml" />
     <Content Include="Views\Empleado\VentaAuto.cshtml" />
     <Content Include="Views\Empleado\Traspaso.cshtml" />
+    <Content Include="Views\Empleado\ListaP.cshtml" />
+    <Content Include="Views\Empleado\AltaAuto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

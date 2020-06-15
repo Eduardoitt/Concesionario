@@ -709,9 +709,12 @@
         <Function Name="AutosAlta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Marca" Type="varchar" Mode="In" />
           <Parameter Name="IdColor" Type="int" Mode="In" />
-          <Parameter Name="IdModelo" Type="int" Mode="In" />
+          <Parameter Name="Modelo" Type="varchar" Mode="In" />
           <Parameter Name="IdAnio" Type="int" Mode="In" />
           <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="Bandera" Type="int" Mode="InOut" />
         </Function>
         <Function Name="Caracteristicas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdAuto" Type="int" Mode="In" />
@@ -1912,9 +1915,12 @@
           <FunctionImport Name="AutosAlta">
             <Parameter Name="Marca" Mode="In" Type="String" />
             <Parameter Name="IdColor" Mode="In" Type="Int32" />
-            <Parameter Name="IdModelo" Mode="In" Type="Int32" />
+            <Parameter Name="Modelo" Mode="In" Type="String" />
             <Parameter Name="IdAnio" Mode="In" Type="Int32" />
             <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Caracteristicas">
             <Parameter Name="IdAuto" Mode="In" Type="Int32" />

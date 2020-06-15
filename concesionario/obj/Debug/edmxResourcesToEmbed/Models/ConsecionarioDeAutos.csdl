@@ -940,9 +940,12 @@
     <FunctionImport Name="AutosAlta">
       <Parameter Name="Marca" Mode="In" Type="String" />
       <Parameter Name="IdColor" Mode="In" Type="Int32" />
-      <Parameter Name="IdModelo" Mode="In" Type="Int32" />
+      <Parameter Name="Modelo" Mode="In" Type="String" />
       <Parameter Name="IdAnio" Mode="In" Type="Int32" />
       <Parameter Name="Precio" Mode="In" Type="Decimal" />
+      <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+      <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+      <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Caracteristicas">
       <Parameter Name="IdAuto" Mode="In" Type="Int32" />

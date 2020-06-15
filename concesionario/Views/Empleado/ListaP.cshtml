@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout Empleado.cshtml";
+}
+
+@*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header card-header-info card-header-text h4">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4 class="card-title">Listado de Pago</h4>
+            </div>
+            <div class="card-body ">
+                <div class="row col-md-12">
+
+                </div>
+                <br />
+                <div class="row">
+
+                    <div class="col-md-12">
+                        @Html.EJS().Grid("Grid").AllowResizing(true).AllowTextWrap().AllowSorting().AllowFiltering().Width("auto").AllowResizing().Columns(col =>
+                        {
+                            col.Field("id_Bitacora").HeaderText("Numero de recibo").IsPrimaryKey(true).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Visible(true).Add();
+                            col.Field("Nombre").HeaderText("Nombre").Visible(true).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("FechaDePago").HeaderText("FechaDePago").Format("yMd").Type("Date").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("Abono").HeaderText("Abono").Visible(false).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("PagoMinimo").HeaderText("PagoMinimo").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("IdVentaAuto").HeaderText("IdVentaAuto").Visible(false).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("Restante").HeaderText("Restante").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+                            col.Field("IdCliente").HeaderText("IdCliente").Visible(false).TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Add();
+
+                        }).AllowPaging().SelectionSettings(select => select.Type(Syncfusion.EJ2.Grids.SelectionType.Single)).PageSettings(page => page.PageSize(10)).Locale("es-mx").Render()
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="Opciones2" type="text/x-template">
+    <div class="btn-group">
+        @*<a class="text-info" href="javascript:void(0)" onclick="Abonar()" data-toggle="tooltip" data-placement="top" title="Abonar">
+                <i class="material-icons">local_atm</i>
+            </a>*@
+        <a class="text-info" href="javascript:void(0)" onclick="Abonar(${ id_Bitacora }, ${PagoMinimo})" data-toggle="tooltip" data-placement="top" title="Abonar">
+            <i class="material-icons">local_atm</i>
+        </a>
+    </div>
+</script>
+
+<script>
+    $(function () {
+        $.get('@Url.Action("Lp", "Empleado")', function (data) {
+            var grid = document.getElementById('Grid').ej2_instances[0]; // Grid instance
+            grid.dataSource = JSON.parse(data);
+        });
+    });
+</script>
