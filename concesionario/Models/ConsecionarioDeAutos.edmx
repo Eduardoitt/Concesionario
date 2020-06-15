@@ -795,6 +795,14 @@
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SP_Traspaso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdModelo" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdSucursalD" Type="int" Mode="In" />
+          <Parameter Name="Bandera" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Usuario_Alta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Usuario" Type="varchar" Mode="In" />
@@ -2007,6 +2015,14 @@
             <Parameter Name="Pago" Mode="In" Type="Decimal" />
             <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_Traspaso">
+            <Parameter Name="IdModelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalD" Mode="In" Type="Int32" />
+            <Parameter Name="Bandera" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2391,6 +2407,7 @@
           <FunctionImportMapping FunctionImportName="SP_Usuario_Alta" FunctionName="ConsecionarioDeAutosModel.Store.SP_Usuario_Alta" />
           <FunctionImportMapping FunctionImportName="SP_CompraCompletada" FunctionName="ConsecionarioDeAutosModel.Store.SP_CompraCompletada" />
           <FunctionImportMapping FunctionImportName="SP_Abonar" FunctionName="ConsecionarioDeAutosModel.Store.SP_Abonar" />
+          <FunctionImportMapping FunctionImportName="SP_Traspaso" FunctionName="ConsecionarioDeAutosModel.Store.SP_Traspaso" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -27,6 +27,7 @@ namespace concesionario.Controllers
                                       ).FirstOrDefault();
 
             ViewBag.NombreEmpleado = nombre + " " + ApP;
+         
             return View("Index");
         }
 
@@ -214,5 +215,69 @@ namespace concesionario.Controllers
                 return PartialView("Index", model);
             }
         }
+
+        [HttpGet]
+        public ActionResult TraspasoA()
+        {
+            ViewBag.Modelo = (from m in db.Modelo
+                            select new
+                            {
+                                IdModelo = m.IdModelo,
+                                Modelo = m.Modelo1
+
+                            }).ToList();
+            ViewBag.Sucursal = (from s in db.Sucursal
+                                select new
+                                {
+                                    IdSucursal = s.IdSucursal,
+                                    Sucursal = s.Direccion
+
+                                }).ToList();
+            ViewBag.Anio = (from a in db.Anio where a.IdAnio!=1
+                                select new
+                                {
+                                    IdAnio = a.IdAnio,
+                                    Anio = a.Anio1
+
+                                }).ToList();
+            ViewBag.SucursalD = (from s in db.Sucursal
+                                select new
+                                {
+                                    IdSucursal = s.IdSucursal,
+                                    Sucursal = s.Direccion
+
+                                }).ToList();
+            return View("Traspaso");
+        }
+        [HttpPost]
+        public ActionResult TraspasoA(Traspaso model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    ObjectParameter OutPut = new ObjectParameter("Bandera", typeof(int));
+                    db.SP_Traspaso(model.IdModelo,model.IdAnio,model.Cantidad,model.IdSucursal,model.IdSucursalD, OutPut);
+                    int valorR = Convert.ToInt32(OutPut.Value);
+                    if (valorR == 1)
+                    {
+                        return Json(new { value = 1, messen = "Traspaso realizado correctamente" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { value = 0, messen = "Ocurrio un error" });
+                    }
+                }
+            }
+            catch
+            {
+                return PartialView("Index", model);
+            }
+        }
+
     }
 }

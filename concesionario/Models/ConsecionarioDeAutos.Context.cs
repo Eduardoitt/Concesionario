@@ -380,5 +380,30 @@ namespace concesionario.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Abonar", id_BitacoraParameter, pagoParameter, bandera);
         }
+    
+        public virtual int SP_Traspaso(Nullable<int> idModelo, Nullable<int> idAnio, Nullable<int> cantidad, Nullable<int> idSucursal, Nullable<int> idSucursalD, ObjectParameter bandera)
+        {
+            var idModeloParameter = idModelo.HasValue ?
+                new ObjectParameter("IdModelo", idModelo) :
+                new ObjectParameter("IdModelo", typeof(int));
+    
+            var idAnioParameter = idAnio.HasValue ?
+                new ObjectParameter("IdAnio", idAnio) :
+                new ObjectParameter("IdAnio", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idSucursalDParameter = idSucursalD.HasValue ?
+                new ObjectParameter("IdSucursalD", idSucursalD) :
+                new ObjectParameter("IdSucursalD", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Traspaso", idModeloParameter, idAnioParameter, cantidadParameter, idSucursalParameter, idSucursalDParameter, bandera);
+        }
     }
 }

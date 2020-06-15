@@ -363,5 +363,6 @@
     <FunctionImportMapping FunctionImportName="SP_Usuario_Alta" FunctionName="ConsecionarioDeAutosModel.Store.SP_Usuario_Alta" />
     <FunctionImportMapping FunctionImportName="SP_CompraCompletada" FunctionName="ConsecionarioDeAutosModel.Store.SP_CompraCompletada" />
     <FunctionImportMapping FunctionImportName="SP_Abonar" FunctionName="ConsecionarioDeAutosModel.Store.SP_Abonar" />
+    <FunctionImportMapping FunctionImportName="SP_Traspaso" FunctionName="ConsecionarioDeAutosModel.Store.SP_Traspaso" />
   </EntityContainerMapping>
 </Mapping>
