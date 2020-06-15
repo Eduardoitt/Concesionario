@@ -172,6 +172,44 @@
                                             </span>
                                         </div>
                                     </div>
+                                    <br />
+                                    <h3>Aval</h3>
+                                    <hr class="col-md-11" />
+
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Nombre del Aval</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.NombreAval, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Apellido Paterno</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.ApPAval, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Apellido Materno</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.ApMAval, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Telefono</label>
+                                            <span class="material-input">
+                                                @Html.EditorFor(model => model.TelefonoAval, new { htmlAttributes = new { @class = "form-control" } })
+                                            </span>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
